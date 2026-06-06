@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+/* ── Design Tokens ── */
+:root {
+  --bg-deep:        #050814;
+  --bg-surface:     #0B1430;
+  --bg-elevated:    #131E45;
+
+  --neon-primary:   #3FA9FF;
+  --neon-bright:    #7DD3FC;
+  --neon-deep:      #1E40AF;
+
+  --accent-gold:    #F5C518;
+  --accent-red:     #FF3355;
+  --accent-sunset:  #FF8C42;
+
+  --text-primary:   #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted:     #64748B;
+
+  --border-subtle:  rgba(63, 169, 255, 0.15);
+  --border-glow:    rgba(63, 169, 255, 0.45);
+
+  --font-sans: var(--font-montserrat);
+  --font-serif: var(--font-cormorant);
+  --font-mono: var(--font-jetbrains);
+}
+
+/* ── Tailwind v4 theme registration ── */
+@theme inline {
+  --color-bg-deep:       var(--bg-deep);
+  --color-bg-surface:    var(--bg-surface);
+  --color-bg-elevated:   var(--bg-elevated);
+  --color-neon-primary:  var(--neon-primary);
+  --color-neon-bright:   var(--neon-bright);
+  --color-neon-deep:     var(--neon-deep);
+  --color-accent-gold:   var(--accent-gold);
+  --color-accent-red:    var(--accent-red);
+  --color-accent-sunset: var(--accent-sunset);
+  --color-text-primary:  var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted:    var(--text-muted);
+
+  --font-sans: var(--font-montserrat, ui-sans-serif, system-ui, sans-serif);
+  --font-serif: var(--font-cormorant, ui-serif, Georgia, serif);
+  --font-mono: var(--font-jetbrains, ui-monospace, monospace);
+}
+
+/* ── Base styles ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-sans, ui-sans-serif, system-ui, sans-serif);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Grid overlay background ── */
+.bg-grid-overlay {
+  background-image:
+    linear-gradient(rgba(63, 169, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(63, 169, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ── Glow utilities ── */
+.glow-neon {
+  box-shadow: 0 0 20px var(--neon-primary), 0 0 40px rgba(63, 169, 255, 0.2);
+}
+
+.glow-gold {
+  box-shadow: 0 0 20px var(--accent-gold), 0 0 40px rgba(245, 197, 24, 0.2);
+}
+
+.glow-subtle {
+  box-shadow: 0 0 12px rgba(63, 169, 255, 0.3);
+}
+
+/* ── Boarding pass perforated edge ── */
+.boarding-pass-edge {
+  background-image: radial-gradient(circle, var(--bg-deep) 5px, transparent 5px);
+  background-size: 14px 14px;
+  background-position: -7px center;
+}
+
+/* ── Scan line overlay ── */
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  pointer-events: none;
+}
+
+/* ── Neon text ── */
+.text-neon {
+  color: var(--neon-primary);
+  text-shadow: 0 0 10px var(--neon-primary), 0 0 20px rgba(63, 169, 255, 0.5);
+}
+
+/* ── Holographic panel ── */
+.glass-panel {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glow);
+}
+
+/* ── Track divider ── */
+.track-divider {
+  border: none;
+  border-top: 2px dashed var(--border-subtle);
+  position: relative;
+}
+
+.track-divider::after {
+  content: '●';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--neon-primary);
+  font-size: 10px;
+  background: var(--bg-deep);
+  padding: 0 8px;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-deep);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--neon-deep);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-primary);
+}
+
+/* ── Selection ── */
+::selection {
+  background: rgba(63, 169, 255, 0.3);
+  color: var(--text-primary);
+}
