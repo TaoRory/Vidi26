@@ -78,7 +78,8 @@ export default function AnnouncementForm({ mode, initial }: AnnouncementFormProp
     setLoading(true);
     setError(null);
 
-    const supabase = createClient();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const supabase = createClient() as any;
     const payload = {
       title: title.trim(),
       slug: slug.trim(),

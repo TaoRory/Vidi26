@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import AnnouncementForm from "../../AnnouncementForm";
+import type { Announcement } from "@/lib/supabase/types";
 
 export default async function EditAnnouncementPage({
   params,
@@ -9,11 +10,12 @@ export default async function EditAnnouncementPage({
 }) {
   const { id } = await params;
   const supabase = await createClient();
-  const { data } = await supabase
+  const { data: raw } = await supabase
     .from("announcements")
     .select("id, title, slug, body_md, cover_url, pinned, published")
     .eq("id", id)
     .single();
+  const data = raw as Announcement | null;
 
   if (!data) notFound();
 

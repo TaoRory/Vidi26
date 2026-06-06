@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Pin, ArrowRight, Megaphone } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { TrainTrack } from "@/components/theme/TrainTrack";
+import type { Announcement } from "@/lib/supabase/types";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -13,14 +14,14 @@ export const revalidate = 60;
 
 export default async function AnnouncementsPage() {
   const supabase = await createClient();
-  const { data } = await supabase
+  const { data: raw } = await supabase
     .from("announcements")
     .select("id, title, slug, cover_url, pinned, published_at, body_md")
     .eq("published", true)
     .order("pinned", { ascending: false })
     .order("published_at", { ascending: false });
 
-  const list = data ?? [];
+  const list = (raw as Announcement[] | null) ?? [];
 
   return (
     <div>

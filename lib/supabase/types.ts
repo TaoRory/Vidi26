@@ -31,6 +31,7 @@ export interface Database {
           created_at?: string
         }
         Update: Partial<Database['public']['Tables']['teams']['Insert']>
+        Relationships: []
       }
       stations: {
         Row: {
@@ -52,6 +53,7 @@ export interface Database {
           order_index?: number | null
         }
         Update: Partial<Database['public']['Tables']['stations']['Insert']>
+        Relationships: []
       }
       challenges: {
         Row: {
@@ -79,6 +81,7 @@ export interface Database {
           created_at?: string
         }
         Update: Partial<Database['public']['Tables']['challenges']['Insert']>
+        Relationships: []
       }
       scores: {
         Row: {
@@ -100,6 +103,7 @@ export interface Database {
           created_at?: string
         }
         Update: Partial<Database['public']['Tables']['scores']['Insert']>
+        Relationships: []
       }
       announcements: {
         Row: {
@@ -125,6 +129,7 @@ export interface Database {
           created_at?: string
         }
         Update: Partial<Database['public']['Tables']['announcements']['Insert']>
+        Relationships: []
       }
       gallery_items: {
         Row: {
@@ -144,6 +149,7 @@ export interface Database {
           uploaded_at?: string
         }
         Update: Partial<Database['public']['Tables']['gallery_items']['Insert']>
+        Relationships: []
       }
       admin_profiles: {
         Row: {
@@ -159,6 +165,7 @@ export interface Database {
           created_at?: string
         }
         Update: Partial<Database['public']['Tables']['admin_profiles']['Insert']>
+        Relationships: []
       }
     }
     Views: {
@@ -171,6 +178,7 @@ export interface Database {
           entered_by: string | null
           created_at: string
         }
+        Relationships: []
       }
       leaderboard: {
         Row: {
@@ -182,9 +190,10 @@ export interface Database {
           challenges_scored: number
           last_update: string | null
         }
+        Relationships: []
       }
     }
-    Functions: Record<string, never>
+    Functions: Record<string, unknown>
     Enums: Record<string, never>
   }
 }

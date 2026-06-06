@@ -3,17 +3,18 @@ import { Plus, Pencil, Pin, Globe, FileText } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import DeleteAnnouncementButton from "./DeleteAnnouncementButton";
 import TogglePublishButton from "./TogglePublishButton";
+import type { Announcement } from "@/lib/supabase/types";
 
 export const revalidate = 0;
 
 export default async function AdminAnnouncementsPage() {
   const supabase = await createClient();
-  const { data: announcements } = await supabase
+  const { data: raw } = await supabase
     .from("announcements")
     .select("id, title, slug, pinned, published, published_at, created_at")
     .order("created_at", { ascending: false });
 
-  const list = announcements ?? [];
+  const list = (raw as Announcement[] | null) ?? [];
 
   return (
     <div className="p-6 max-w-5xl">

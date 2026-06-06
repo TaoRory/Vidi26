@@ -10,7 +10,8 @@ export default function TogglePublishButton({ id, published }: { id: string; pub
 
   async function handleToggle() {
     setLoading(true);
-    const supabase = createClient();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const supabase = createClient() as any;
     await supabase
       .from("announcements")
       .update({

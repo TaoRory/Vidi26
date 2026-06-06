@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Pin, ArrowLeft, Clock } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
+import type { Announcement } from "@/lib/supabase/types";
 import type { Metadata } from "next";
 
 export const revalidate = 60;
@@ -19,7 +20,8 @@ export async function generateMetadata({
     .eq("slug", slug)
     .eq("published", true)
     .single();
-  return { title: data?.title ?? "Thông Báo" };
+  const row = data as Pick<Announcement, "title"> | null;
+  return { title: row?.title ?? "Thông Báo" };
 }
 
 export default async function AnnouncementDetailPage({
@@ -29,12 +31,13 @@ export default async function AnnouncementDetailPage({
 }) {
   const { slug } = await params;
   const supabase = await createClient();
-  const { data } = await supabase
+  const { data: raw } = await supabase
     .from("announcements")
     .select("*")
     .eq("slug", slug)
     .eq("published", true)
     .single();
+  const data = raw as Announcement | null;
 
   if (!data) notFound();
 
