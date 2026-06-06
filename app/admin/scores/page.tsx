@@ -124,7 +124,7 @@ export default function AdminScoresPage() {
       .eq("challenge_id", selectedChallenge.id)
       .order("created_at", { ascending: false })
       .limit(50);
-    setHistory((data as HistoryEntry[]) || []);
+    setHistory((data as unknown as HistoryEntry[]) || []);
     setHistoryLoading(false);
   }
 

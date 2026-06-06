@@ -1,9 +1,10 @@
 import { createClient } from "@/lib/supabase/server";
-import { Trophy, Users, Target, Clock } from "lucide-react";
+import { Trophy, Users, Target, Clock, Link2 } from "lucide-react";
 import Link from "next/link";
 import GlowPanel from "@/components/theme/GlowPanel";
 import NeonButton from "@/components/theme/NeonButton";
 import type { Metadata } from "next";
+import type { Team } from "@/lib/supabase/types";
 
 export const metadata: Metadata = { title: "Dashboard — Admin" };
 
@@ -17,6 +18,7 @@ async function getStats() {
       { count: totalTeams },
       { count: totalChallenges },
       { data: recentScores },
+      { data: teamsRaw },
     ] = await Promise.all([
       supabase.from("scores").select("*", { count: "exact", head: true }),
       supabase.from("teams").select("*", { count: "exact", head: true }),
@@ -26,15 +28,20 @@ async function getStats() {
         .select("id, raw_score, notes, created_at, teams(name, team_number), challenges(name)")
         .order("created_at", { ascending: false })
         .limit(5),
+      supabase
+        .from("teams")
+        .select("id, team_number, name, color_hex, access_token")
+        .order("team_number"),
     ]);
-    return { totalScores: totalScores ?? 0, totalTeams: totalTeams ?? 0, totalChallenges: totalChallenges ?? 0, recentScores: recentScores ?? [] };
+    const teams = (teamsRaw as Team[] | null) ?? [];
+    return { totalScores: totalScores ?? 0, totalTeams: totalTeams ?? 0, totalChallenges: totalChallenges ?? 0, recentScores: recentScores ?? [], teams };
   } catch {
-    return { totalScores: 0, totalTeams: 0, totalChallenges: 0, recentScores: [] };
+    return { totalScores: 0, totalTeams: 0, totalChallenges: 0, recentScores: [], teams: [] as Team[] };
   }
 }
 
 export default async function AdminDashboardPage() {
-  const { totalScores, totalTeams, totalChallenges, recentScores } = await getStats();
+  const { totalScores, totalTeams, totalChallenges, recentScores, teams } = await getStats();
 
   const stats = [
     { label: "Lượt nhập điểm", value: totalScores, icon: Trophy, color: "var(--accent-gold)" },
@@ -102,6 +109,49 @@ export default async function AdminDashboardPage() {
         </div>
       </div>
 
+      {/* Team links */}
+      {teams.length > 0 && (
+        <div className="mb-8">
+          <h2 className="text-sm uppercase tracking-wider font-bold mb-1 flex items-center gap-2" style={{ color: "var(--text-secondary)" }}>
+            <Link2 size={14} />
+            Link xem điểm cho Team Leader
+          </h2>
+          <p className="text-xs mb-3" style={{ color: "var(--text-muted)" }}>
+            Chia sẻ link dưới đây cho team leader của từng đội — chỉ xem được đội mình.
+          </p>
+          <GlowPanel className="p-0 overflow-hidden">
+            <div className="max-h-64 overflow-y-auto">
+              {teams.map((t, i) => (
+                <div
+                  key={t.id}
+                  className="flex items-center gap-3 px-4 py-2.5"
+                  style={{ borderBottom: i < teams.length - 1 ? "1px solid var(--border-subtle)" : "none" }}
+                >
+                  <div
+                    className="w-2 h-2 rounded-full shrink-0"
+                    style={{ backgroundColor: t.color_hex ?? "var(--neon-primary)" }}
+                  />
+                  <span className="text-xs font-medium w-20 shrink-0" style={{ color: "var(--text-primary)" }}>
+                    {t.name}
+                  </span>
+                  <code className="flex-1 text-[10px] truncate" style={{ color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>
+                    /my-team/{t.access_token}
+                  </code>
+                  <Link
+                    href={`/my-team/${t.access_token}`}
+                    target="_blank"
+                    className="shrink-0 text-[10px] px-2 py-1 rounded transition-colors"
+                    style={{ backgroundColor: "rgba(63,169,255,0.08)", color: "var(--neon-primary)", border: "1px solid rgba(63,169,255,0.2)" }}
+                  >
+                    Xem
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </GlowPanel>
+        </div>
+      )}
+
       {/* Recent activity */}
       <div>
         <h2 className="text-sm uppercase tracking-wider font-bold mb-4" style={{ color: "var(--text-secondary)" }}>
@@ -114,7 +164,7 @@ export default async function AdminDashboardPage() {
             </p>
           ) : (
             <div>
-              {(recentScores as Array<{ id: string; raw_score: number; notes: string | null; created_at: string; teams: { name: string; team_number: number } | null; challenges: { name: string } | null }>).map((s, i) => (
+              {(recentScores as unknown as Array<{ id: string; raw_score: number; notes: string | null; created_at: string; teams: { name: string; team_number: number } | null; challenges: { name: string } | null }>).map((s, i) => (
                 <div
                   key={s.id}
                   className="flex items-center gap-3 px-5 py-3"

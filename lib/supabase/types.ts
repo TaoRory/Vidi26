@@ -19,6 +19,7 @@ export interface Database {
           members: Json
           cohort: string
           created_at: string
+          access_token: string
         }
         Insert: {
           id?: string
@@ -29,6 +30,7 @@ export interface Database {
           members?: Json
           cohort?: string
           created_at?: string
+          access_token?: string
         }
         Update: Partial<Database['public']['Tables']['teams']['Insert']>
         Relationships: []
@@ -193,7 +195,26 @@ export interface Database {
         Relationships: []
       }
     }
-    Functions: Record<string, unknown>
+    Functions: {
+      get_team_by_token: {
+        Args: { p_token: string }
+        Returns: {
+          team_id: string
+          team_number: number
+          team_name: string
+          color_hex: string | null
+          total_score: number
+          team_rank: number
+          challenge_id: string | null
+          challenge_name: string | null
+          station_name: string | null
+          raw_score: number | null
+          max_score: number | null
+          weight: number | null
+          scored_at: string | null
+        }[]
+      }
+    }
     Enums: Record<string, never>
   }
 }
