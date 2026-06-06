@@ -4,8 +4,14 @@
 ALTER TABLE teams
   ADD COLUMN IF NOT EXISTS access_token UUID NOT NULL DEFAULT gen_random_uuid();
 
-ALTER TABLE teams
-  ADD CONSTRAINT IF NOT EXISTS teams_access_token_key UNIQUE (access_token);
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_constraint WHERE conname = 'teams_access_token_key'
+  ) THEN
+    ALTER TABLE teams ADD CONSTRAINT teams_access_token_key UNIQUE (access_token);
+  END IF;
+END $$;
 
 -- SECURITY DEFINER function: returns a team's score breakdown given its token.
 -- Runs with postgres privileges (bypasses RLS on scores/latest_scores),
