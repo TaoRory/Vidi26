@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import { TrainTrack } from "@/components/theme/TrainTrack";
 import AgendaTabs from "./AgendaTabs";
 import type { Metadata } from "next";
@@ -35,7 +35,7 @@ export default function AgendaPage() {
             <div>
               <h1
                 className="text-3xl sm:text-4xl font-black uppercase tracking-wider"
-                style={{ fontFamily: "var(--font-serif)", color: "var(--text-primary)" }}
+                style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}
               >
                 Hành <span style={{ color: "var(--neon-primary)" }}>Trình</span>
               </h1>

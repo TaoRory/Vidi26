@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { Pin, ArrowRight, Megaphone } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { TrainTrack } from "@/components/theme/TrainTrack";
@@ -44,7 +44,7 @@ export default async function AnnouncementsPage() {
             <div>
               <h1
                 className="text-3xl sm:text-4xl font-black uppercase tracking-wider"
-                style={{ fontFamily: "var(--font-serif)", color: "var(--text-primary)" }}
+                style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}
               >
                 Thông <span style={{ color: "var(--neon-primary)" }}>Báo</span>
               </h1>

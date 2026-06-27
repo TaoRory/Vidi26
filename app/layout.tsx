@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Montserrat, Cormorant_Garamond, JetBrains_Mono } from "next/font/google";
+import { Montserrat, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -8,10 +9,9 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
-  subsets: ["latin"],
-  weight: ["300", "400", "600", "700"],
+const sakana = localFont({
+  src: "../public/fonts/Sakana.otf",
+  variable: "--font-sakana",
   display: "swap",
 });
 
@@ -50,7 +50,7 @@ export default function RootLayout({
   return (
     <html
       lang="vi"
-      className={`${montserrat.variable} ${cormorant.variable} ${jetbrainsMono.variable} h-full`}
+      className={`${montserrat.variable} ${sakana.variable} ${jetbrainsMono.variable} h-full`}
     >
       <body className="min-h-full flex flex-col antialiased bg-grid-overlay">
         {children}

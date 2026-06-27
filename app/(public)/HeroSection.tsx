@@ -2,49 +2,37 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Train, Star } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, Train } from "lucide-react";
 import NeonButton from "@/components/theme/NeonButton";
 import { TrainTrack } from "@/components/theme/TrainTrack";
-
-const STATIONS = [
-  { num: "01", vi: "Dashboard",    en: "Home",         href: "/"             },
-  { num: "02", vi: "Timeline",     en: "Agenda",       href: "/agenda"       },
-  { num: "03", vi: "Leaderboard",  en: "Leaderboard",  href: "/leaderboard"  },
-  { num: "04", vi: "Announcement", en: "News",         href: "/announcements"},
-];
 
 export default function HeroSection() {
   return (
     <section className="relative min-h-[90vh] flex flex-col overflow-hidden">
-      {/* Background gradient */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(30,64,175,0.25) 0%, transparent 70%), radial-gradient(ellipse 60% 40% at 80% 50%, rgba(63,169,255,0.08) 0%, transparent 60%)",
-        }}
-      />
-
-      {/* Floating particles */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 rounded-full"
-            style={{
-              backgroundColor: "var(--neon-primary)",
-              left: `${10 + i * 12}%`,
-              top: `${20 + (i % 3) * 20}%`,
-              opacity: 0.4,
-            }}
-            animate={{ y: [-10, 10, -10], opacity: [0.2, 0.6, 0.2] }}
-            transition={{ duration: 3 + i * 0.5, repeat: Infinity, ease: "easeInOut" }}
-          />
-        ))}
+      {/* KV Background image */}
+      <div className="absolute inset-0 pointer-events-none">
+        <Image
+          src="/kv-background.png"
+          alt="VIDI26 KV"
+          fill
+          priority
+          className="object-cover object-center"
+          quality={90}
+        />
+        {/* Dark overlay to keep text readable */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to right, rgba(5,8,20,0.88) 0%, rgba(5,8,20,0.65) 55%, rgba(5,8,20,0.1) 100%), linear-gradient(to top, rgba(5,8,20,0.9) 0%, transparent 40%)",
+          }}
+        />
       </div>
 
       {/* Main hero content */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 pt-16 pb-8 flex-1 flex flex-col justify-center">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           {/* Left: Text */}
           <div>
             {/* Event badge */}
@@ -54,8 +42,9 @@ export default function HeroSection() {
               transition={{ duration: 0.6 }}
               className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6"
               style={{
-                backgroundColor: "rgba(63,169,255,0.1)",
+                backgroundColor: "rgba(63,169,255,0.12)",
                 border: "1px solid var(--border-glow)",
+                backdropFilter: "blur(8px)",
               }}
             >
               <Train size={12} style={{ color: "var(--neon-primary)" }} />
@@ -64,35 +53,46 @@ export default function HeroSection() {
               </span>
             </motion.div>
 
-            {/* Headline */}
+            {/* Headline — Sakana font */}
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1 }}
-              className="mb-4"
+              className="mb-3"
             >
               <div
-                className="text-5xl sm:text-6xl lg:text-7xl font-black uppercase leading-none tracking-tight"
-                style={{ fontFamily: "var(--font-serif)", color: "var(--text-primary)" }}
+                className="text-6xl sm:text-7xl lg:text-8xl leading-none"
+                style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}
               >
                 VIDI
-                <span style={{ color: "var(--accent-gold)", textShadow: "0 0 30px rgba(245,197,24,0.4)" }}>
+                <span style={{ color: "var(--accent-gold)", textShadow: "0 0 40px rgba(245,197,24,0.5)" }}>
                   26
                 </span>
               </div>
               <div
-                className="text-xl sm:text-2xl font-light uppercase tracking-[0.3em] mt-1"
-                style={{ color: "var(--neon-primary)" }}
+                className="text-lg sm:text-2xl uppercase tracking-[0.35em] mt-2"
+                style={{ fontFamily: "var(--font-display)", color: "var(--neon-primary)", textShadow: "0 0 20px rgba(63,169,255,0.6)" }}
               >
                 Next Station
               </div>
             </motion.h1>
 
+            {/* Sub-tagline */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.18 }}
+              className="text-sm uppercase tracking-widest mb-5"
+              style={{ fontFamily: "var(--font-display)", color: "var(--accent-gold)", opacity: 0.85 }}
+            >
+              Trạm Kế Tiếp
+            </motion.div>
+
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="text-base sm:text-lg mb-8 leading-relaxed max-w-lg"
+              transition={{ duration: 0.7, delay: 0.25 }}
+              className="text-sm sm:text-base mb-8 leading-relaxed max-w-md"
               style={{ color: "var(--text-secondary)" }}
             >
               Chuyến tàu VIDI26 đang chờ khởi hành. Cùng LEXCE và hơn 300 Cohort-7-to-be
@@ -102,7 +102,7 @@ export default function HeroSection() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.3 }}
+              transition={{ duration: 0.7, delay: 0.35 }}
               className="flex flex-wrap gap-3"
             >
               <Link href="/leaderboard">
@@ -116,106 +116,61 @@ export default function HeroSection() {
                 </NeonButton>
               </Link>
             </motion.div>
+
+            {/* Quick links */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="flex gap-5 mt-8"
+            >
+              {[
+                { label: "Timeline", href: "/agenda" },
+                { label: "Leaderboard", href: "/leaderboard" },
+                { label: "Thông báo", href: "/announcements" },
+              ].map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="text-xs uppercase tracking-wider transition-colors"
+                  style={{ color: "var(--text-muted)" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--neon-primary)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </motion.div>
           </div>
 
-          {/* Right: Station route map */}
+          {/* Right: LEXCE mascot */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative"
+            initial={{ opacity: 0, x: 50, scale: 0.95 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            transition={{ duration: 0.9, delay: 0.15, ease: "easeOut" }}
+            className="hidden lg:flex items-end justify-center relative"
+            style={{ minHeight: "420px" }}
           >
-            <div
-              className="rounded-2xl p-6"
-              style={{
-                backgroundColor: "var(--bg-surface)",
-                border: "1px solid var(--border-glow)",
-                boxShadow: "0 0 40px rgba(63,169,255,0.1)",
-              }}
+            <motion.div
+              animate={{ y: [-8, 8, -8] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="relative"
+              style={{ width: 360, height: 420 }}
             >
-              {/* Header */}
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <div className="text-[9px] uppercase tracking-widest" style={{ color: "var(--text-muted)" }}>
-                    ROUTE MAP
-                  </div>
-                  <div className="text-sm font-bold uppercase" style={{ color: "var(--neon-primary)" }}>
-                    VIDI26 Express
-                  </div>
-                </div>
-                <div
-                  className="text-xs px-2 py-1 rounded"
-                  style={{ backgroundColor: "rgba(63,169,255,0.1)", color: "var(--neon-primary)", border: "1px solid var(--border-glow)", fontFamily: "var(--font-mono)" }}
-                >
-                  3N · 2Đ
-                </div>
-              </div>
+              <Image
+                src="/lexce-mascot.svg"
+                alt="LEXCE — Linh vật VIDI26"
+                fill
+                className="object-contain object-bottom drop-shadow-2xl"
+                style={{ filter: "drop-shadow(0 0 30px rgba(63,169,255,0.35))" }}
+              />
+            </motion.div>
 
-              {/* Station list */}
-              <div className="relative">
-                <div
-                  className="absolute left-3 top-0 bottom-0 w-px"
-                  style={{ background: "linear-gradient(to bottom, var(--neon-primary), var(--neon-deep))" }}
-                />
-                <div className="space-y-3 pl-8">
-                  {STATIONS.map((s, i) => (
-                    <motion.div
-                      key={s.num}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: 0.4 + i * 0.08 }}
-                      className="flex items-center gap-3"
-                    >
-                      {/* Station dot */}
-                      <div
-                        className="absolute left-2 w-2.5 h-2.5 rounded-full"
-                        style={{
-                          backgroundColor: i === 0 ? "var(--accent-gold)" : "var(--neon-primary)",
-                          boxShadow: i === 0 ? "0 0 10px var(--accent-gold)" : "0 0 8px var(--neon-primary)",
-                          marginLeft: "-1px",
-                        }}
-                      />
-                      <span
-                        className="text-[9px] font-mono"
-                        style={{ color: "var(--text-muted)" }}
-                      >
-                        {s.num}
-                      </span>
-                      <div>
-                        <span
-                          className="text-sm font-bold"
-                          style={{ color: i === 0 ? "var(--accent-gold)" : "var(--text-primary)" }}
-                        >
-                          {s.vi}
-                        </span>
-                        <span className="text-xs ml-2" style={{ color: "var(--text-muted)" }}>
-                          {s.en}
-                        </span>
-                      </div>
-                      {i === 0 && (
-                        <Star size={10} style={{ color: "var(--accent-gold)" }} />
-                      )}
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Final destination */}
-              <div
-                className="mt-5 rounded-lg p-3 text-center"
-                style={{ backgroundColor: "var(--bg-deep)", border: "2px solid var(--accent-gold)" }}
-              >
-                <div className="text-[9px] uppercase tracking-widest mb-0.5" style={{ color: "var(--text-muted)" }}>
-                  FINAL STOP
-                </div>
-                <div className="text-xl font-black uppercase" style={{ color: "var(--text-primary)" }}>
-                  VINUNIVERSITY
-                </div>
-                <div className="text-[9px] uppercase tracking-widest mt-0.5" style={{ color: "var(--accent-gold)" }}>
-                  WHERE THE FUTURE BEGINS
-                </div>
-              </div>
-            </div>
+            {/* Glow circle behind mascot */}
+            <div
+              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-64 h-16 rounded-full blur-2xl"
+              style={{ backgroundColor: "rgba(63,169,255,0.18)" }}
+            />
           </motion.div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import { createClient } from "@/lib/supabase/server";
 import LeaderboardLive from "@/components/leaderboard/LeaderboardLive";
 import { TrainTrack } from "@/components/theme/TrainTrack";
@@ -49,7 +49,7 @@ export default async function LeaderboardPage() {
             <div>
               <h1
                 className="text-3xl sm:text-4xl font-black uppercase tracking-wider"
-                style={{ fontFamily: "var(--font-serif)", color: "var(--text-primary)" }}
+                style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}
               >
                 Tỏa <span style={{ color: "var(--accent-gold)" }}>Sáng</span>
               </h1>

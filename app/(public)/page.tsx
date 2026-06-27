@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { ArrowRight, Megaphone, Trophy } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { SectionDivider } from "@/components/theme/TrainTrack";
@@ -45,7 +45,7 @@ export default async function HomePage() {
             <Megaphone size={18} style={{ color: "var(--neon-primary)" }} />
             <h2
               className="text-2xl font-black uppercase tracking-wider"
-              style={{ color: "var(--text-primary)", fontFamily: "var(--font-serif)" }}
+              style={{ color: "var(--text-primary)", fontFamily: "var(--font-display)" }}
             >
               Thông Báo
             </h2>
@@ -103,7 +103,7 @@ export default async function HomePage() {
             <Trophy size={18} style={{ color: "var(--accent-gold)" }} />
             <h2
               className="text-2xl font-black uppercase tracking-wider"
-              style={{ color: "var(--text-primary)", fontFamily: "var(--font-serif)" }}
+              style={{ color: "var(--text-primary)", fontFamily: "var(--font-display)" }}
             >
               Bảng Xếp Hạng
             </h2>
