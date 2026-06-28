@@ -15,7 +15,7 @@ export default function HeroSection() {
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage: "url('/kv-background.png')",
-          backgroundSize: "contain",
+          backgroundSize: "115% auto",
           backgroundPosition: "center center",
           backgroundRepeat: "no-repeat",
           backgroundColor: "var(--bg-deep)",
@@ -177,7 +177,7 @@ export default function HeroSection() {
             <motion.div
               animate={{ y: [-10, 10, -10] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              style={{ width: 620, height: 700, position: "relative", zIndex: 1, marginBottom: "-30px" }}
+              style={{ width: 620, height: 700, position: "relative", zIndex: 1, marginBottom: "-80px" }}
             >
               <Image
                 src="/lexce-mascot.svg"
