@@ -47,7 +47,7 @@ export default function Footer() {
               </div>
               <div>
                 <div className="text-[9px] uppercase" style={{ color: "var(--text-muted)" }}>DATE</div>
-                <div style={{ color: "var(--text-secondary)" }}>17.06.2026</div>
+                <div style={{ color: "var(--text-secondary)" }}>09.07.2026</div>
               </div>
               <div>
                 <div className="text-[9px] uppercase" style={{ color: "var(--text-muted)" }}>GATE</div>

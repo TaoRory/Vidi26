@@ -7,7 +7,7 @@ import Image from "next/image";
 import { Menu, X, Train } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const EVENT_DATE = new Date("2026-06-17T08:00:00+07:00");
+const EVENT_DATE = new Date("2026-07-09T08:00:00+07:00");
 
 const NAV_ITEMS = [
   { href: "/",             label: "Dashboard",    en: "Home",         num: "01" },

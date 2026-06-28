@@ -20,21 +20,22 @@ export default function HeroSection() {
           className="object-cover object-center"
           quality={90}
         />
-        {/* Dark overlay to keep text readable */}
+        {/* Dark overlay: heavy on left for text, fades right */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to right, rgba(5,8,20,0.88) 0%, rgba(5,8,20,0.65) 55%, rgba(5,8,20,0.1) 100%), linear-gradient(to top, rgba(5,8,20,0.9) 0%, transparent 40%)",
+              "linear-gradient(to right, rgba(5,8,20,0.92) 0%, rgba(5,8,20,0.72) 40%, rgba(5,8,20,0.2) 70%, rgba(5,8,20,0.05) 100%), linear-gradient(to top, rgba(5,8,20,0.85) 0%, transparent 35%)",
           }}
         />
       </div>
 
       {/* Main hero content */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 pt-16 pb-8 flex-1 flex flex-col justify-center">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          {/* Left: Text */}
-          <div>
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 sm:px-10 pt-16 pb-8 flex-1 flex flex-col justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[520px_1fr] gap-6 items-center">
+
+          {/* Left: Text — fixed width so it stays tight on left */}
+          <div className="max-w-[480px]">
             {/* Event badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -49,11 +50,11 @@ export default function HeroSection() {
             >
               <Train size={12} style={{ color: "var(--neon-primary)" }} />
               <span className="text-xs uppercase tracking-wider" style={{ color: "var(--neon-primary)" }}>
-                VIDI26 Express · 17.06.2026
+                VIDI26 Express · 09.07.2026
               </span>
             </motion.div>
 
-            {/* Headline — Sakana font */}
+            {/* Headline */}
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -61,7 +62,7 @@ export default function HeroSection() {
               className="mb-3"
             >
               <div
-                className="text-6xl sm:text-7xl lg:text-8xl leading-none"
+                className="text-7xl sm:text-8xl lg:text-9xl leading-none"
                 style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}
               >
                 VIDI
@@ -70,14 +71,13 @@ export default function HeroSection() {
                 </span>
               </div>
               <div
-                className="text-lg sm:text-2xl uppercase tracking-[0.35em] mt-2"
+                className="text-xl sm:text-2xl uppercase tracking-[0.35em] mt-2"
                 style={{ fontFamily: "var(--font-display)", color: "var(--neon-primary)", textShadow: "0 0 20px rgba(63,169,255,0.6)" }}
               >
                 Next Station
               </div>
             </motion.h1>
 
-            {/* Sub-tagline */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -92,7 +92,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.25 }}
-              className="text-sm sm:text-base mb-8 leading-relaxed max-w-md"
+              className="text-sm sm:text-base mb-8 leading-relaxed"
               style={{ color: "var(--text-secondary)" }}
             >
               Chuyến tàu VIDI26 đang chờ khởi hành. Cùng LEXCE và hơn 300 Cohort-7-to-be
@@ -117,7 +117,6 @@ export default function HeroSection() {
               </Link>
             </motion.div>
 
-            {/* Quick links */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -143,39 +142,60 @@ export default function HeroSection() {
             </motion.div>
           </div>
 
-          {/* Right: LEXCE mascot */}
+          {/* Right: LEXCE mascot with shadow layer */}
           <motion.div
-            initial={{ opacity: 0, x: 50, scale: 0.95 }}
+            initial={{ opacity: 0, x: 60, scale: 0.9 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{ duration: 0.9, delay: 0.15, ease: "easeOut" }}
+            transition={{ duration: 1, delay: 0.15, ease: "easeOut" }}
             className="hidden lg:flex items-end justify-center relative"
-            style={{ minHeight: "420px" }}
+            style={{ minHeight: "500px" }}
           >
+            {/* Shadow / ghost — larger, blurred, dimmed, slightly offset */}
+            <div
+              className="absolute"
+              style={{
+                width: 580,
+                height: 640,
+                bottom: -20,
+                left: "50%",
+                transform: "translateX(-46%) scaleX(0.85)",
+                opacity: 0.18,
+                filter: "blur(18px) brightness(1.8)",
+              }}
+            >
+              <Image
+                src="/lexce-mascot.svg"
+                alt=""
+                fill
+                aria-hidden
+                className="object-contain object-bottom"
+              />
+            </div>
+
+            {/* Main mascot — floating animation */}
             <motion.div
-              animate={{ y: [-8, 8, -8] }}
+              animate={{ y: [-10, 10, -10] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="relative"
-              style={{ width: 360, height: 420 }}
+              style={{ width: 500, height: 580, position: "relative", zIndex: 1 }}
             >
               <Image
                 src="/lexce-mascot.svg"
                 alt="LEXCE — Linh vật VIDI26"
                 fill
-                className="object-contain object-bottom drop-shadow-2xl"
-                style={{ filter: "drop-shadow(0 0 30px rgba(63,169,255,0.35))" }}
+                className="object-contain object-bottom"
+                style={{ filter: "drop-shadow(0 0 40px rgba(63,169,255,0.4)) drop-shadow(0 20px 60px rgba(63,169,255,0.2))" }}
               />
             </motion.div>
 
-            {/* Glow circle behind mascot */}
+            {/* Ground glow */}
             <div
-              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-64 h-16 rounded-full blur-2xl"
-              style={{ backgroundColor: "rgba(63,169,255,0.18)" }}
+              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-80 h-12 rounded-full blur-3xl"
+              style={{ backgroundColor: "rgba(63,169,255,0.22)" }}
             />
           </motion.div>
         </div>
       </div>
 
-      {/* Train track at bottom */}
       <TrainTrack className="mt-4" />
     </section>
   );

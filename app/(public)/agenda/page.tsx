@@ -40,12 +40,12 @@ export default function AgendaPage() {
                 Hành <span style={{ color: "var(--neon-primary)" }}>Trình</span>
               </h1>
               <p className="text-sm uppercase tracking-widest" style={{ color: "var(--text-muted)" }}>
-                AGENDA · 17–19.06.2026 · 3N2Đ
+                AGENDA · 09–11.07.2026 · 3N2Đ
               </p>
             </div>
           </div>
           <p className="max-w-2xl text-sm" style={{ color: "var(--text-secondary)" }}>
-            Chuyến tàu VIDI26 Express khởi hành 17.06.2026 — 3 ngày 2 đêm, 7 trạm thử thách, 24 đội thi đua.
+            Chuyến tàu VIDI26 Express khởi hành 09.07.2026 — 3 ngày 2 đêm, 7 trạm thử thách, 24 đội thi đua.
           </p>
 
           {/* Mini route strip */}
