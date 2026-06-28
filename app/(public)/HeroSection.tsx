@@ -10,16 +10,17 @@ import { TrainTrack } from "@/components/theme/TrainTrack";
 export default function HeroSection() {
   return (
     <section className="relative min-h-[90vh] flex flex-col overflow-hidden">
-      {/* KV Background image */}
-      <div className="absolute inset-0 pointer-events-none">
-        <Image
-          src="/kv-background.png"
-          alt="VIDI26 KV"
-          fill
-          priority
-          className="object-cover object-center"
-          quality={90}
-        />
+      {/* KV Background image — contain so edges are not cropped */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: "url('/kv-background.png')",
+          backgroundSize: "contain",
+          backgroundPosition: "center center",
+          backgroundRepeat: "no-repeat",
+          backgroundColor: "var(--bg-deep)",
+        }}
+      >
         {/* Dark overlay: heavy on left for text, fades right */}
         <div
           className="absolute inset-0"
@@ -148,19 +149,19 @@ export default function HeroSection() {
             animate={{ opacity: 1, x: 0, scale: 1 }}
             transition={{ duration: 1, delay: 0.15, ease: "easeOut" }}
             className="hidden lg:flex items-end justify-center relative"
-            style={{ minHeight: "500px" }}
+            style={{ minHeight: "560px" }}
           >
-            {/* Shadow / ghost — larger, blurred, dimmed, slightly offset */}
+            {/* Shadow / ghost — blurred, dimmed layer below mascot */}
             <div
               className="absolute"
               style={{
-                width: 580,
-                height: 640,
-                bottom: -20,
+                width: 700,
+                height: 780,
+                bottom: -40,
                 left: "50%",
-                transform: "translateX(-46%) scaleX(0.85)",
-                opacity: 0.18,
-                filter: "blur(18px) brightness(1.8)",
+                transform: "translateX(-46%) scaleX(0.82)",
+                opacity: 0.2,
+                filter: "blur(20px) brightness(2)",
               }}
             >
               <Image
@@ -172,11 +173,11 @@ export default function HeroSection() {
               />
             </div>
 
-            {/* Main mascot — floating animation */}
+            {/* Main mascot — larger + floating */}
             <motion.div
               animate={{ y: [-10, 10, -10] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              style={{ width: 500, height: 580, position: "relative", zIndex: 1 }}
+              style={{ width: 620, height: 700, position: "relative", zIndex: 1, marginBottom: "-30px" }}
             >
               <Image
                 src="/lexce-mascot.svg"
@@ -189,8 +190,8 @@ export default function HeroSection() {
 
             {/* Ground glow */}
             <div
-              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-80 h-12 rounded-full blur-3xl"
-              style={{ backgroundColor: "rgba(63,169,255,0.22)" }}
+              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-14 rounded-full blur-3xl"
+              style={{ backgroundColor: "rgba(63,169,255,0.25)" }}
             />
           </motion.div>
         </div>
