@@ -169,7 +169,7 @@ export default function HeroSection() {
                 height: 920,
                 bottom: -80,
                 left: "50%",
-                transform: "translateX(-46%) scaleX(0.8)",
+                transform: "translateX(-56%) scaleX(0.8)",
                 opacity: 0.22,
                 filter: "blur(22px) brightness(2.2)",
               }}
@@ -187,7 +187,7 @@ export default function HeroSection() {
             <motion.div
               animate={{ y: [-10, 10, -10] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              style={{ width: 740, height: 840, position: "relative", zIndex: 1, marginBottom: "-160px" }}
+              style={{ width: 740, height: 840, position: "relative", zIndex: 1, marginBottom: "-220px", marginLeft: "-80px" }}
             >
               <Image
                 src="/lexce-mascot.svg"
