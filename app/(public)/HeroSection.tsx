@@ -14,7 +14,7 @@ export default function HeroSection() {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: "url('/kv-background.png')",
+          backgroundImage: "url('/kv-background.webp')",
           backgroundSize: "115% auto",
           backgroundPosition: "center center",
           backgroundRepeat: "no-repeat",
