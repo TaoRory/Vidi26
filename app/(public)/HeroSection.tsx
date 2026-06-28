@@ -10,7 +10,7 @@ import { TrainTrack } from "@/components/theme/TrainTrack";
 export default function HeroSection() {
   return (
     <section className="relative min-h-[90vh] flex flex-col overflow-hidden">
-      {/* KV Background image — contain so edges are not cropped */}
+      {/* KV Background image */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -18,15 +18,25 @@ export default function HeroSection() {
           backgroundSize: "115% auto",
           backgroundPosition: "center center",
           backgroundRepeat: "no-repeat",
-          backgroundColor: "var(--bg-deep)",
+          backgroundColor: "#050814",
         }}
       >
+        {/* Blend top strip — matches KV starfield top edge */}
+        <div
+          className="absolute inset-x-0 top-0 pointer-events-none"
+          style={{ height: "120px", background: "linear-gradient(to bottom, #050814 0%, #06091e 60%, transparent 100%)" }}
+        />
+        {/* Blend bottom strip — matches KV floor bottom edge */}
+        <div
+          className="absolute inset-x-0 bottom-0 pointer-events-none"
+          style={{ height: "140px", background: "linear-gradient(to top, #050814 0%, #060a1c 55%, transparent 100%)" }}
+        />
         {/* Dark overlay: heavy on left for text, fades right */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to right, rgba(5,8,20,0.92) 0%, rgba(5,8,20,0.72) 40%, rgba(5,8,20,0.2) 70%, rgba(5,8,20,0.05) 100%), linear-gradient(to top, rgba(5,8,20,0.85) 0%, transparent 35%)",
+              "linear-gradient(to right, rgba(5,8,20,0.92) 0%, rgba(5,8,20,0.72) 40%, rgba(5,8,20,0.2) 70%, rgba(5,8,20,0.05) 100%)",
           }}
         />
       </div>
@@ -149,19 +159,19 @@ export default function HeroSection() {
             animate={{ opacity: 1, x: 0, scale: 1 }}
             transition={{ duration: 1, delay: 0.15, ease: "easeOut" }}
             className="hidden lg:flex items-end justify-center relative"
-            style={{ minHeight: "560px" }}
+            style={{ minHeight: "600px" }}
           >
-            {/* Shadow / ghost — blurred, dimmed layer below mascot */}
+            {/* Shadow / ghost layer */}
             <div
               className="absolute"
               style={{
-                width: 700,
-                height: 780,
-                bottom: -40,
+                width: 820,
+                height: 920,
+                bottom: -80,
                 left: "50%",
-                transform: "translateX(-46%) scaleX(0.82)",
-                opacity: 0.2,
-                filter: "blur(20px) brightness(2)",
+                transform: "translateX(-46%) scaleX(0.8)",
+                opacity: 0.22,
+                filter: "blur(22px) brightness(2.2)",
               }}
             >
               <Image
@@ -173,25 +183,25 @@ export default function HeroSection() {
               />
             </div>
 
-            {/* Main mascot — larger + floating */}
+            {/* Main mascot */}
             <motion.div
               animate={{ y: [-10, 10, -10] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              style={{ width: 620, height: 700, position: "relative", zIndex: 1, marginBottom: "-80px" }}
+              style={{ width: 740, height: 840, position: "relative", zIndex: 1, marginBottom: "-160px" }}
             >
               <Image
                 src="/lexce-mascot.svg"
                 alt="LEXCE — Linh vật VIDI26"
                 fill
                 className="object-contain object-bottom"
-                style={{ filter: "drop-shadow(0 0 40px rgba(63,169,255,0.4)) drop-shadow(0 20px 60px rgba(63,169,255,0.2))" }}
+                style={{ filter: "drop-shadow(0 0 50px rgba(63,169,255,0.4)) drop-shadow(0 20px 70px rgba(63,169,255,0.2))" }}
               />
             </motion.div>
 
             {/* Ground glow */}
             <div
               className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-14 rounded-full blur-3xl"
-              style={{ backgroundColor: "rgba(63,169,255,0.25)" }}
+              style={{ backgroundColor: "rgba(63,169,255,0.28)" }}
             />
           </motion.div>
         </div>
