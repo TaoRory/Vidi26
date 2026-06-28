@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Train, MapPin } from "lucide-react";
 
 const STATIONS = [
@@ -19,155 +20,16 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
 
-          {/* Left: Boarding Pass — adapted from KV Mẫu vé */}
-          <div
-            className="rounded-xl overflow-hidden"
-            style={{
-              border: "1.5px solid rgba(245,197,24,0.35)",
-              boxShadow: "0 0 24px rgba(245,197,24,0.07), 0 0 0 1px rgba(63,169,255,0.08)",
-            }}
-          >
-            {/* Header strip — dark navy */}
-            <div
-              className="px-4 py-2.5 flex items-center justify-between"
-              style={{ backgroundColor: "#060c24", borderBottom: "1px solid rgba(245,197,24,0.15)" }}
-            >
-              {/* VinUniversity logo mark */}
-              <div className="flex items-center gap-1.5">
-                <div
-                  className="w-5 h-5 rounded flex items-center justify-center text-white font-black text-[10px]"
-                  style={{ background: "linear-gradient(135deg, var(--neon-primary), var(--neon-deep))" }}
-                >
-                  V
-                </div>
-                <span className="text-[8px] uppercase tracking-widest font-semibold" style={{ color: "var(--text-muted)" }}>
-                  VinUniversity
-                </span>
-              </div>
-
-              {/* BOARDING PASS title */}
-              <div
-                className="text-sm font-black italic tracking-wide"
-                style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)", letterSpacing: "0.05em" }}
-              >
-                BOARDiNG PASS
-              </div>
-
-              <Train size={14} style={{ color: "var(--neon-primary)" }} />
-            </div>
-
-            {/* Passenger + barcode row */}
-            <div
-              className="px-4 pt-3 pb-2.5 flex items-center gap-3"
-              style={{ backgroundColor: "#0b1535" }}
-            >
-              <div className="shrink-0">
-                <div className="text-[8px] uppercase tracking-wider mb-0.5" style={{ color: "var(--text-muted)" }}>Passenger</div>
-                <div className="text-sm font-black uppercase" style={{ color: "var(--neon-primary)", fontFamily: "var(--font-display)" }}>
-                  LEXCE
-                </div>
-              </div>
-
-              {/* Barcode */}
-              <div className="flex-1">
-                <div
-                  className="h-7 w-full rounded-sm"
-                  style={{
-                    background: "repeating-linear-gradient(90deg, rgba(248,250,252,0.75) 0px, rgba(248,250,252,0.75) 2px, transparent 2px, transparent 4px, rgba(248,250,252,0.4) 4px, rgba(248,250,252,0.4) 5px, transparent 5px, transparent 9px)",
-                  }}
-                />
-                <div className="text-center text-[7px] mt-0.5 tracking-widest" style={{ color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>
-                  VINUNI DISCOVERY 2026
-                </div>
-              </div>
-            </div>
-
-            {/* Perforated tear line */}
-            <div className="relative flex items-center px-2" style={{ height: "12px" }}>
-              {/* Left notch */}
-              <div className="absolute -left-2 w-4 h-4 rounded-full" style={{ backgroundColor: "var(--bg-surface)" }} />
-              <div
-                className="flex-1 border-t border-dashed"
-                style={{ borderColor: "rgba(245,197,24,0.4)", borderTopWidth: "1.5px" }}
-              />
-              {/* Right notch */}
-              <div className="absolute -right-2 w-4 h-4 rounded-full" style={{ backgroundColor: "var(--bg-surface)" }} />
-            </div>
-
-            {/* Main content: From/To + Info fields */}
-            <div
-              className="px-4 py-3 flex gap-4"
-              style={{ backgroundColor: "#0b1535" }}
-            >
-              {/* From / To route */}
-              <div className="flex-1 relative pl-4">
-                <div
-                  className="absolute left-[5px] top-2 bottom-2 w-px border-l border-dashed"
-                  style={{ borderColor: "rgba(63,169,255,0.5)" }}
-                />
-                {/* From */}
-                <div className="mb-3">
-                  <div className="text-[8px] uppercase tracking-wider" style={{ color: "var(--text-muted)" }}>From</div>
-                  <div
-                    className="absolute left-[2px] w-[7px] h-[7px] rounded-full"
-                    style={{ backgroundColor: "var(--neon-primary)", top: "22px", boxShadow: "0 0 6px var(--neon-primary)" }}
-                  />
-                  <div className="text-[11px] font-semibold" style={{ color: "var(--text-secondary)" }}>LEXCEVERSE</div>
-                </div>
-                {/* To */}
-                <div>
-                  <div className="text-[8px] uppercase tracking-wider" style={{ color: "var(--text-muted)" }}>To</div>
-                  <div
-                    className="absolute left-[2px] w-[7px] h-[7px] rounded-full"
-                    style={{ backgroundColor: "var(--accent-gold)", bottom: "12px", boxShadow: "0 0 6px var(--accent-gold)" }}
-                  />
-                  <div className="text-[11px] font-bold" style={{ color: "var(--text-primary)" }}>VINUNIVERSITY</div>
-                </div>
-              </div>
-
-              {/* Info fields */}
-              <div className="space-y-2 shrink-0">
-                <div>
-                  <div className="text-[8px] uppercase tracking-wider" style={{ color: "var(--text-muted)" }}>APID</div>
-                  <div className="text-[11px]" style={{ color: "var(--text-secondary)", fontFamily: "var(--font-mono)" }}>VIDI26-001</div>
-                </div>
-                <div>
-                  <div className="text-[8px] uppercase tracking-wider" style={{ color: "var(--text-muted)" }}>Gate</div>
-                  <div className="text-[11px] font-bold" style={{ color: "var(--neon-primary)" }}>VIDI 26</div>
-                </div>
-                <div>
-                  <div className="text-[8px] uppercase tracking-wider" style={{ color: "var(--text-muted)" }}>Departure Date</div>
-                  <div className="text-[11px] font-bold" style={{ color: "var(--accent-gold)" }}>JULY 09, 2026</div>
-                </div>
-              </div>
-            </div>
-
-            {/* VIDI26 brand footer strip */}
-            <div
-              className="px-4 py-2.5 flex items-center justify-between"
-              style={{ backgroundColor: "#060c24", borderTop: "1px solid rgba(245,197,24,0.12)" }}
-            >
-              <Link
-                href="/agenda"
-                className="text-[9px] uppercase tracking-wider transition-colors"
-                style={{ color: "var(--text-muted)" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--neon-primary)")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
-              >
-                ★ Agenda here
-              </Link>
-              <div className="text-right">
-                <div
-                  className="text-base font-black leading-none"
-                  style={{ color: "var(--accent-gold)", fontFamily: "var(--font-display)" }}
-                >
-                  VIDI26
-                </div>
-                <div className="text-[7px] mt-0.5" style={{ color: "var(--text-muted)" }}>
-                  VinUni, Where the future begins
-                </div>
-              </div>
-            </div>
+          {/* Left: Boarding Pass — KV image */}
+          <div className="rounded-xl overflow-hidden" style={{ boxShadow: "0 0 24px rgba(245,197,24,0.08)" }}>
+            <Image
+              src="/boarding-pass.png"
+              alt="VIDI26 Boarding Pass"
+              width={600}
+              height={280}
+              className="w-full h-auto"
+              style={{ display: "block" }}
+            />
           </div>
 
           {/* Center: Route stations */}
