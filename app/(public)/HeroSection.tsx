@@ -187,7 +187,7 @@ export default function HeroSection() {
             <motion.div
               animate={{ y: [-10, 10, -10] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              style={{ width: 740, height: 840, position: "relative", zIndex: 1, marginBottom: "-220px", marginLeft: "-80px" }}
+              style={{ width: 740, height: 840, position: "relative", zIndex: 1, marginBottom: "-250px", marginLeft: "-80px" }}
             >
               <Image
                 src="/lexce-mascot.svg"
