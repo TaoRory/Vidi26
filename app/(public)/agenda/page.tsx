@@ -30,8 +30,8 @@ export default function AgendaPage() {
           borderBottom: "1px solid var(--border-subtle)",
         }}
       >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-10 pb-8">
-          <div className="flex items-center gap-3 mb-3">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-10 pb-8 text-center">
+          <div className="flex items-center justify-center gap-3 mb-3">
             <Image src="/logo-vidi26.svg" alt="VIDI26" width={110} height={52} style={{ objectFit: "contain" }} />
             <div>
               <h1
@@ -45,8 +45,8 @@ export default function AgendaPage() {
               </p>
             </div>
           </div>
-          <p className="max-w-2xl text-sm" style={{ color: "var(--text-secondary)" }}>
-            Chuyến tàu VIDI26 Express khởi hành 09.07.2026 — 3 ngày 2 đêm, 7 trạm thử thách, 24 đội thi đua.
+          <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
+            Chuyến tàu VIDI26 Express khởi hành 09.07.2026 — 3 ngày 2 đêm, 8 trạm thử thách, 24 đội thi đua.
           </p>
 
           {/* Mini route strip */}
