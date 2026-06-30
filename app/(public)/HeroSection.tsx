@@ -21,10 +21,10 @@ export default function HeroSection() {
           backgroundColor: "#050814",
         }}
       >
-        {/* Blend top strip — matches KV starfield top edge */}
+        {/* Subtle top edge blend — keep short so building dome is not hidden */}
         <div
           className="absolute inset-x-0 top-0 pointer-events-none"
-          style={{ height: "120px", background: "linear-gradient(to bottom, #050814 0%, #06091e 60%, transparent 100%)" }}
+          style={{ height: "36px", background: "linear-gradient(to bottom, #050814 0%, transparent 100%)" }}
         />
         {/* Blend bottom strip — matches KV floor bottom edge */}
         <div
