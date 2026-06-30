@@ -1,13 +1,16 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Train } from "lucide-react";
 import NeonButton from "@/components/theme/NeonButton";
 import { TrainTrack } from "@/components/theme/TrainTrack";
+import StoryModal from "@/components/theme/StoryModal";
 
 export default function HeroSection() {
+  const [storyOpen, setStoryOpen] = useState(false);
   return (
     <section className="relative min-h-[90vh] flex flex-col overflow-hidden">
       {/* KV Background image */}
@@ -121,11 +124,11 @@ export default function HeroSection() {
                   <Train size={16} /> Lên tàu thôi
                 </NeonButton>
               </Link>
-              <Link href="/story">
+              <button onClick={() => setStoryOpen(true)}>
                 <NeonButton variant="secondary" size="lg">
                   Câu chuyện <ArrowRight size={16} />
                 </NeonButton>
-              </Link>
+              </button>
             </motion.div>
 
             <motion.div
@@ -208,6 +211,8 @@ export default function HeroSection() {
       </div>
 
       <TrainTrack className="mt-4" />
+
+      {storyOpen && <StoryModal onClose={() => setStoryOpen(false)} />}
     </section>
   );
 }
