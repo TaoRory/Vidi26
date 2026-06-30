@@ -178,6 +178,16 @@ const STATION_COLORS: Record<string, string> = {
   "Tỏa Sáng": "var(--accent-gold)",
 };
 
+const STATION_EN: Record<string, string> = {
+  "Khởi Hành": "Departure",
+  "Đồng Hành": "Companion",
+  "Kích Hoạt": "Ignite",
+  "Kế Tiếp":   "Next Stop",
+  "Tri Thức":  "Knowledge",
+  "Lưu Dấu":  "Memory",
+  "Tỏa Sáng": "Shine",
+};
+
 function AgendaCard({ item, accent }: { item: AgendaItem; accent: string }) {
   const { lang, t } = useLanguage();
   const isSpecial = item.type === "special";
@@ -185,8 +195,11 @@ function AgendaCard({ item, accent }: { item: AgendaItem; accent: string }) {
   const stationColor = item.station ? STATION_COLORS[item.station] ?? accent : accent;
 
   const prefix = t.agenda.station_prefix;
-  const displayTitle = item.station
-    ? `${prefix} ${item.station}`
+  const stationName = item.station
+    ? (lang === "en" ? (STATION_EN[item.station] ?? item.station) : item.station)
+    : null;
+  const displayTitle = stationName
+    ? `${prefix} ${stationName}`
     : (lang === "en" ? (item.title_en ?? item.title) : item.title);
   const activityTag = item.station
     ? (lang === "en" ? (item.title_en ?? item.title) : item.title)
