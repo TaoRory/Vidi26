@@ -116,7 +116,6 @@ const DAY2: AgendaItem[] = [
         title: "WORKSHOP",
         time: "09:00 → 10:00",
         items: [
-          "Bổ sung thông tin",
           "W1 - Academic Life 101 - Prof. Lien Trinh",
           "W2 - Resilience - Ms. Ngo Van Dung",
           "W3 - A Jigsaw of Culture: Explore VinUni International Community - VISA",
