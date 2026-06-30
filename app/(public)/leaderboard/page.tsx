@@ -43,8 +43,8 @@ export default async function LeaderboardPage() {
           borderBottom: "1px solid var(--border-subtle)",
         }}
       >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-10 pb-8">
-          <div className="flex items-center gap-3 mb-2">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-10 pb-8 text-center">
+          <div className="flex items-center justify-center gap-3 mb-2">
             <Image src="/logo-vidi26.svg" alt="VIDI26" width={110} height={52} style={{ objectFit: "contain" }} />
             <div>
               <h1
@@ -58,7 +58,7 @@ export default async function LeaderboardPage() {
               </p>
             </div>
           </div>
-          <p className="max-w-2xl text-sm sm:text-base" style={{ color: "var(--text-secondary)" }}>
+          <p className="text-sm sm:text-base" style={{ color: "var(--text-secondary)" }}>
             Bảng xếp hạng theo thời gian thực. Mỗi đội vượt qua thử thách, điểm cập nhật ngay lập tức.
           </p>
         </div>
