@@ -18,7 +18,7 @@ const DAY1: AgendaItem[] = [
     time: "07:00 → 10:00",
     title: "Arrival & Check-in",
     location: "Ký túc xá (JA, JB)",
-    station: "Soát Vé",
+    station: "Khởi Hành",
     highlight: true,
     type: "special",
   },
@@ -154,8 +154,7 @@ const DAYS = [
 ];
 
 const STATION_COLORS: Record<string, string> = {
-  "Soát Vé":   "var(--neon-primary)",
-  "Khởi Hành": "var(--neon-bright)",
+  "Khởi Hành": "var(--neon-primary)",
   "Đồng Hành": "#a78bfa",
   "Kích Hoạt": "var(--accent-sunset)",
   "Kế Tiếp":   "#f472b6",

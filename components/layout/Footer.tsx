@@ -5,14 +5,13 @@ import Image from "next/image";
 import { Train, MapPin } from "lucide-react";
 
 const STATIONS = [
-  { slug: "soat-ve",    vi: "Soát Vé",    num: "01" },
-  { slug: "khoi-hanh",  vi: "Khởi Hành",  num: "02" },
-  { slug: "dong-hanh",  vi: "Đồng Hành",  num: "03" },
-  { slug: "kich-hoat",  vi: "Kích Hoạt",  num: "04" },
-  { slug: "ke-tiep",    vi: "Kế Tiếp",    num: "05" },
-  { slug: "tri-thuc",   vi: "Tri Thức",   num: "06" },
-  { slug: "luu-dau",    vi: "Lưu Dấu",    num: "07" },
-  { slug: "toa-sang",   vi: "Tỏa Sáng",   num: "08" },
+  { slug: "khoi-hanh",  vi: "Khởi Hành",  num: "01" },
+  { slug: "dong-hanh",  vi: "Đồng Hành",  num: "02" },
+  { slug: "kich-hoat",  vi: "Kích Hoạt",  num: "03" },
+  { slug: "ke-tiep",    vi: "Kế Tiếp",    num: "04" },
+  { slug: "tri-thuc",   vi: "Tri Thức",   num: "05" },
+  { slug: "luu-dau",    vi: "Lưu Dấu",    num: "06" },
+  { slug: "toa-sang",   vi: "Tỏa Sáng",   num: "07" },
 ];
 
 export default function Footer() {

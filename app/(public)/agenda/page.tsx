@@ -9,14 +9,13 @@ export const metadata: Metadata = {
 };
 
 const STATIONS = [
-  { num: "01", vi: "Soát Vé",    en: "Boarding Gate",       day: 1 },
-  { num: "02", vi: "Khởi Hành",  en: "Departure Station",   day: 1 },
-  { num: "03", vi: "Đồng Hành",  en: "Companion Station",   day: 1 },
-  { num: "04", vi: "Kích Hoạt",  en: "Ignite Station",      day: 2 },
-  { num: "05", vi: "Kế Tiếp",   en: "Next Station",        day: 2 },
-  { num: "06", vi: "Tri Thức",   en: "Brain Station",       day: 2 },
-  { num: "07", vi: "Lưu Dấu",   en: "Memory Station",      day: 3 },
-  { num: "08", vi: "Tỏa Sáng",  en: "Shine Station",       day: 3 },
+  { num: "01", vi: "Khởi Hành",  en: "Departure Station",   day: 1 },
+  { num: "02", vi: "Đồng Hành",  en: "Companion Station",   day: 1 },
+  { num: "03", vi: "Kích Hoạt",  en: "Ignite Station",      day: 1 },
+  { num: "04", vi: "Kế Tiếp",   en: "Next Station",        day: 2 },
+  { num: "05", vi: "Tri Thức",   en: "Brain Station",       day: 2 },
+  { num: "06", vi: "Lưu Dấu",   en: "Memory Station",      day: 3 },
+  { num: "07", vi: "Tỏa Sáng",  en: "Shine Station",       day: 3 },
 ];
 
 export default function AgendaPage() {
@@ -46,7 +45,7 @@ export default function AgendaPage() {
             </div>
           </div>
           <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
-            Chuyến tàu VIDI26 Express khởi hành 09.07.2026 — 3 ngày 2 đêm, 8 trạm thử thách, 24 đội thi đua.
+            Chuyến tàu VIDI26 Express khởi hành 09.07.2026 - 3 ngày 2 đêm, 7 trạm thử thách, 24 đội thi đua.
           </p>
 
           {/* Mini route strip */}
