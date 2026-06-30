@@ -8,9 +8,11 @@ import { ArrowRight, Train } from "lucide-react";
 import NeonButton from "@/components/theme/NeonButton";
 import { TrainTrack } from "@/components/theme/TrainTrack";
 import StoryModal from "@/components/theme/StoryModal";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function HeroSection() {
   const [storyOpen, setStoryOpen] = useState(false);
+  const { t } = useLanguage();
   return (
     <section className="relative min-h-[90vh] flex flex-col overflow-hidden">
       {/* KV Background image */}
@@ -110,7 +112,7 @@ export default function HeroSection() {
           >
             <Train size={12} style={{ color: "var(--neon-primary)" }} />
             <span className="text-xs uppercase tracking-wider" style={{ color: "var(--neon-primary)" }}>
-              VIDI26 Express · 09.07.2026
+              {t.hero.badge}
             </span>
           </motion.div>
 
@@ -145,7 +147,7 @@ export default function HeroSection() {
             className="text-sm uppercase tracking-widest mb-5"
             style={{ fontFamily: "var(--font-display)", color: "var(--accent-gold)", opacity: 0.85 }}
           >
-            Trạm Kế Tiếp
+            {t.hero.subtitle}
           </motion.div>
 
           <motion.p
@@ -155,8 +157,7 @@ export default function HeroSection() {
             className="text-sm sm:text-base mb-8 leading-relaxed"
             style={{ color: "var(--text-secondary)" }}
           >
-            Chuyến tàu VIDI26 đang chờ khởi hành. Cùng LEXCE và hơn 300 Cohort-7-to-be
-            vượt qua từng trạm thử thách, thu thập năng lượng và đưa hành trình về đích VinUni.
+            {t.hero.description}
           </motion.p>
 
           <motion.div
@@ -167,12 +168,12 @@ export default function HeroSection() {
           >
             <Link href="/leaderboard">
               <NeonButton variant="primary" size="lg">
-                <Train size={16} /> Lên tàu thôi
+                <Train size={16} /> {t.hero.cta_board}
               </NeonButton>
             </Link>
             <button onClick={() => setStoryOpen(true)}>
               <NeonButton variant="secondary" size="lg">
-                Câu chuyện <ArrowRight size={16} />
+                {t.hero.cta_story} <ArrowRight size={16} />
               </NeonButton>
             </button>
           </motion.div>
@@ -184,9 +185,9 @@ export default function HeroSection() {
             className="flex gap-5 mt-8"
           >
             {[
-              { label: "Timeline", href: "/agenda" },
-              { label: "Leaderboard", href: "/leaderboard" },
-              { label: "Thông báo", href: "/announcements" },
+              { label: t.hero.link_timeline,      href: "/agenda" },
+              { label: t.hero.link_leaderboard,   href: "/leaderboard" },
+              { label: t.hero.link_announcements, href: "/announcements" },
             ].map((item) => (
               <Link
                 key={item.href}

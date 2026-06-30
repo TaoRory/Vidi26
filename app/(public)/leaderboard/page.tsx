@@ -1,7 +1,6 @@
-﻿import Image from "next/image";
-import { createClient } from "@/lib/supabase/server";
+﻿import { createClient } from "@/lib/supabase/server";
 import LeaderboardLive from "@/components/leaderboard/LeaderboardLive";
-import { TrainTrack } from "@/components/theme/TrainTrack";
+import LeaderboardHeader from "./LeaderboardHeader";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -35,32 +34,7 @@ export default async function LeaderboardPage() {
 
   return (
     <div>
-      {/* Header */}
-      <div
-        className="relative overflow-hidden"
-        style={{
-          background: "linear-gradient(to bottom, rgba(30,64,175,0.2) 0%, transparent 100%)",
-          borderBottom: "1px solid var(--border-subtle)",
-        }}
-      >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-10 pb-8 text-center">
-          <div className="flex items-center justify-center gap-3 mb-2">
-            <Image src="/logo-vidi26.svg" alt="VIDI26" width={110} height={52} style={{ objectFit: "contain" }} />
-            <div>
-              <h1
-                className="text-3xl sm:text-4xl font-black uppercase tracking-wider"
-                style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}
-              >
-                Leader<span style={{ color: "var(--accent-gold)" }}>board</span>
-              </h1>
-            </div>
-          </div>
-          <p className="text-sm sm:text-base" style={{ color: "var(--text-secondary)" }}>
-            Bảng xếp hạng theo thời gian thực. Mỗi đội vượt qua thử thách, điểm cập nhật ngay lập tức.
-          </p>
-        </div>
-        <TrainTrack animated className="mt-2" />
-      </div>
+      <LeaderboardHeader />
 
       {/* Main content */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-10">

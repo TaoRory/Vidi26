@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Train, MapPin } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const STATIONS = [
   { slug: "khoi-hanh",  vi: "Khởi Hành",  num: "01" },
@@ -15,6 +16,8 @@ const STATIONS = [
 ];
 
 export default function Footer() {
+  const { t } = useLanguage();
+  const f = t.footer;
   return (
     <footer style={{ backgroundColor: "var(--bg-surface)", borderTop: "1px solid var(--border-subtle)" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-10">
@@ -35,7 +38,7 @@ export default function Footer() {
           {/* Center: Route stations */}
           <div>
             <div className="text-xs uppercase tracking-widest mb-4" style={{ color: "var(--text-muted)" }}>
-              Hành Trình
+              {f.journey_label}
             </div>
             <div className="relative pl-4">
               <div
@@ -57,7 +60,7 @@ export default function Footer() {
                       className="text-xs transition-colors group-hover:text-neon-bright"
                       style={{ color: i === STATIONS.length - 1 ? "var(--accent-gold)" : "var(--text-secondary)" }}
                     >
-                      Trạm {s.vi}
+                      {f.station_prefix} {s.vi}
                     </span>
                     {i === STATIONS.length - 1 && <MapPin size={10} style={{ color: "var(--accent-gold)" }} />}
                   </Link>
@@ -69,13 +72,13 @@ export default function Footer() {
           {/* Right: Links + FINAL STOP */}
           <div className="space-y-4">
             <div>
-              <div className="text-xs uppercase tracking-widest mb-3" style={{ color: "var(--text-muted)" }}>Liên kết</div>
+              <div className="text-xs uppercase tracking-widest mb-3" style={{ color: "var(--text-muted)" }}>{f.links_label}</div>
               <div className="grid grid-cols-2 gap-2">
                 {[
-                  { href: "/leaderboard",   label: "Bảng xếp hạng" },
-                  { href: "/teams",          label: "Danh sách đội" },
-                  { href: "/gallery",        label: "Gallery" },
-                  { href: "/announcements",  label: "Thông báo" },
+                  { href: "/leaderboard",   label: f.links.leaderboard },
+                  { href: "/teams",          label: f.links.teams },
+                  { href: "/gallery",        label: f.links.gallery },
+                  { href: "/announcements",  label: f.links.announcements },
                 ].map((link) => (
                   <Link
                     key={link.href}
@@ -102,26 +105,26 @@ export default function Footer() {
               {/* Top stripe */}
               <div className="py-1 px-3" style={{ background: "rgba(245,197,24,0.15)", borderBottom: "1px solid rgba(245,197,24,0.3)" }}>
                 <span className="text-[8px] uppercase tracking-[0.25em] font-bold" style={{ color: "var(--accent-gold)" }}>
-                  ★ ĐIỂM ĐẾN CUỐI CÙNG ★
+                  {f.final_badge}
                 </span>
               </div>
               {/* Main content */}
               <div className="px-4 py-3">
-                <div className="text-[9px] uppercase tracking-widest mb-1" style={{ color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>FINAL STOP</div>
+                <div className="text-[9px] uppercase tracking-widest mb-1" style={{ color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>{f.final_stop}</div>
                 <div
                   className="text-2xl font-black uppercase tracking-widest"
                   style={{ color: "var(--text-primary)", textShadow: "0 0 20px rgba(245,197,24,0.4)", fontFamily: "var(--font-display)" }}
                 >
-                  VinUni
+                  {f.final_name}
                 </div>
                 <div className="text-[9px] uppercase tracking-widest mt-0.5" style={{ color: "var(--text-secondary)" }}>
-                  VinUniversity · Hà Nội
+                  {f.final_sub}
                 </div>
               </div>
               {/* Bottom stripe */}
               <div className="py-1 px-3 flex items-center justify-center gap-1.5" style={{ background: "rgba(245,197,24,0.12)", borderTop: "1px solid rgba(245,197,24,0.3)" }}>
                 <Train size={8} style={{ color: "var(--accent-gold)" }} />
-                <span className="text-[8px] uppercase tracking-[0.2em] font-bold" style={{ color: "var(--accent-gold)" }}>NEXT STATION</span>
+                <span className="text-[8px] uppercase tracking-[0.2em] font-bold" style={{ color: "var(--accent-gold)" }}>{f.next_station}</span>
                 <Train size={8} style={{ color: "var(--accent-gold)" }} />
               </div>
             </div>
@@ -133,8 +136,8 @@ export default function Footer() {
           className="mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs"
           style={{ borderTop: "1px solid var(--border-subtle)", color: "var(--text-muted)" }}
         >
-          <div>© 2026 VIDI26 — VinUni Discovery. LEXCE ★ Lead · Explore · Connect · Empower</div>
-          <div><span style={{ fontFamily: "var(--font-mono)" }}>YOU · US · FUTURE</span></div>
+          <div>{f.copyright}</div>
+          <div><span style={{ fontFamily: "var(--font-mono)" }}>{f.tagline}</span></div>
         </div>
       </div>
     </footer>

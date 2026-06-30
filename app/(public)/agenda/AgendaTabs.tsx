@@ -2,14 +2,17 @@
 
 import { useState } from "react";
 import { Clock, MapPin, Star } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 type AgendaItem = {
   time?: string;
   title: string;
+  title_en?: string;
   location?: string;
   station?: string;
   highlight?: boolean;
   sub?: string[];
+  sub_en?: string[];
   type?: "break" | "special" | "default";
 };
 
@@ -54,12 +57,14 @@ const DAY1: AgendaItem[] = [
   {
     time: "16:30 → 18:00",
     title: "Sport activities + Nghỉ ngơi",
+    title_en: "Sport activities + Rest time",
     location: "K-Complex",
     type: "break",
   },
   {
     time: "18:00 → 20:00",
     title: "Dinner time - Khám phá ẩm thực",
+    title_en: "Dinner time - Food Discovery",
     type: "break",
   },
   {
@@ -73,6 +78,7 @@ const DAY1: AgendaItem[] = [
   {
     time: "22:00",
     title: "Kết thúc lịch trình ngày 1",
+    title_en: "End of Day 1",
     location: "Ký túc xá",
     type: "break",
   },
@@ -113,12 +119,14 @@ const DAY2: AgendaItem[] = [
   {
     time: "14:30 → 17:30",
     title: "Tập văn nghệ + Tổng duyệt + Nghỉ ngơi tự do",
+    title_en: "Arts rehearsal + Full run + Free time",
     location: "Auditorium + Ký túc xá",
     type: "break",
   },
   {
     time: "18:30 → 22:00",
     title: "Gala Dinner + Trao thưởng",
+    title_en: "Gala Dinner + Awards Ceremony",
     location: "Auditorium",
     station: "Tỏa Sáng",
     highlight: true,
@@ -129,10 +137,17 @@ const DAY2: AgendaItem[] = [
       "Trao thưởng — các đội/cá nhân nổi bật",
       "Tổng kết hành trình VIDI26",
     ],
+    sub_en: [
+      "Dinner and networking",
+      "Challenge scoring and results reveal",
+      "Awards — outstanding teams & individuals",
+      "VIDI26 journey closing ceremony",
+    ],
   },
   {
     time: "22:00",
     title: "Kết thúc lịch trình ngày 2",
+    title_en: "End of Day 2",
     location: "Ký túc xá",
     type: "break",
   },
@@ -147,10 +162,10 @@ const DAY3: AgendaItem[] = [
   },
 ];
 
-const DAYS = [
-  { label: "Ngày 1", sublabel: "09.07", color: "var(--neon-primary)",   items: DAY1 },
-  { label: "Ngày 2", sublabel: "10.07", color: "var(--accent-sunset)",  items: DAY2 },
-  { label: "Ngày 3", sublabel: "11.07", color: "var(--accent-gold)",    items: DAY3 },
+const DAYS_DATA = [
+  { sublabel: "09.07", color: "var(--neon-primary)",   items: DAY1 },
+  { sublabel: "10.07", color: "var(--accent-sunset)",  items: DAY2 },
+  { sublabel: "11.07", color: "var(--accent-gold)",    items: DAY3 },
 ];
 
 const STATION_COLORS: Record<string, string> = {
@@ -164,14 +179,19 @@ const STATION_COLORS: Record<string, string> = {
 };
 
 function AgendaCard({ item, accent }: { item: AgendaItem; accent: string }) {
+  const { lang, t } = useLanguage();
   const isSpecial = item.type === "special";
   const isBreak   = item.type === "break";
   const stationColor = item.station ? STATION_COLORS[item.station] ?? accent : accent;
 
-  // Station items: big title = "Trạm X", activity tag = item.title
-  // Non-station items: big title = item.title, no tag
-  const mainTitle  = item.station ? `Trạm ${item.station}` : item.title;
-  const activityTag = item.station ? item.title : null;
+  const prefix = t.agenda.station_prefix;
+  const displayTitle = item.station
+    ? `${prefix} ${item.station}`
+    : (lang === "en" ? (item.title_en ?? item.title) : item.title);
+  const activityTag = item.station
+    ? (lang === "en" ? (item.title_en ?? item.title) : item.title)
+    : null;
+  const subItems = lang === "en" ? (item.sub_en ?? item.sub) : item.sub;
 
   return (
     <div
@@ -212,7 +232,7 @@ function AgendaCard({ item, accent }: { item: AgendaItem; accent: string }) {
               style={{ color: isSpecial ? "var(--text-primary)" : "var(--text-secondary)" }}
             >
               {item.highlight && <Star size={12} className="inline mr-1.5 mb-0.5" style={{ color: stationColor }} />}
-              {mainTitle}
+              {displayTitle}
             </h3>
             {activityTag && (
               <span
@@ -233,9 +253,9 @@ function AgendaCard({ item, accent }: { item: AgendaItem; accent: string }) {
               {item.location}
             </p>
           )}
-          {item.sub && item.sub.length > 0 && (
+          {subItems && subItems.length > 0 && (
             <ul className="space-y-1.5 mt-2">
-              {item.sub.map((s, i) => (
+              {subItems.map((s, i) => (
                 <li key={i} className="flex items-start gap-2 text-xs" style={{ color: "var(--text-secondary)" }}>
                   <span style={{ color: stationColor, marginTop: 2, flexShrink: 0 }}>▸</span>
                   <span>{s}</span>
@@ -251,6 +271,8 @@ function AgendaCard({ item, accent }: { item: AgendaItem; accent: string }) {
 
 export default function AgendaTabs() {
   const [activeDay, setActiveDay] = useState(0);
+  const { t } = useLanguage();
+  const DAYS = DAYS_DATA.map((d, i) => ({ ...d, label: t.agenda.day_labels[i] }));
   const day = DAYS[activeDay];
 
   return (
@@ -301,7 +323,7 @@ export default function AgendaTabs() {
         </div>
         <div>
           <div className="text-xs font-semibold uppercase tracking-wider" style={{ color: day.color }}>
-            Hoạt động chính
+            {t.agenda.main_activities}
           </div>
           <div className="text-xs" style={{ color: "var(--text-muted)" }}>
             {day.label} · {day.sublabel}.2026 · VIDI26 EXPRESS

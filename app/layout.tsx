@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Montserrat, JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -57,7 +58,7 @@ export default function RootLayout({
       className={`${montserrat.variable} ${sakana.variable} ${jetbrainsMono.variable} h-full`}
     >
       <body className="min-h-full flex flex-col antialiased bg-grid-overlay">
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );

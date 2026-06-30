@@ -3,15 +3,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Zap, Radio } from "lucide-react";
 import { useEffect } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-const STORY = [
-  `Sau kỳ thi THPT, mỗi học sinh đều đứng trước một bước chuyển mình quan trọng: rời khỏi hành trình quen thuộc để bước vào một chặng đường hoàn toàn mới. Nhưng "trạm kế tiếp" sẽ là đâu, và mình cần chuẩn bị gì để sẵn sàng cho bước tiếp theo?`,
-  `Trên đường rời khỏi Lexceverse, LEXCE cần lên chuyến tàu VIDI26 — chuyến tàu duy nhất có thể đưa LEXCE trở về VinUni. Nhưng lần này, LEXCE không đi một mình. Đồng hành cùng LEXCE là hơn 300 người bạn Cohort-7-to-be, những người cũng đang đi tìm trạm kế tiếp của riêng mình.`,
-  `Tuy nhiên, chuyến tàu VIDI26 chưa thể khởi động vì nguồn năng lượng đã bị phân tán tại các trạm khác nhau. Để đưa chuyến tàu trở về VinUni, LEXCE và các bạn cần cùng nhau vượt qua từng trạm thử thách, thu thập đủ đồng xu năng lượng và khôi phục hành trình.`,
-  `Liệu LEXCE và hơn 300 Cohort-7-to-be có thể cùng nhau mở khóa các trạm kế tiếp? Câu trả lời sẽ phụ thuộc vào sự đoàn kết, đồng lòng và tinh thần sẵn sàng bứt phá của tất cả các bạn trong hành trình VIDI26.`,
-];
-
-/* Electric corner ornament */
 function Corner({ pos }: { pos: "tl" | "tr" | "bl" | "br" }) {
   const style: React.CSSProperties = {
     position: "absolute",
@@ -35,6 +28,9 @@ function Corner({ pos }: { pos: "tl" | "tr" | "bl" | "br" }) {
 }
 
 export default function StoryModal({ onClose }: { onClose: () => void }) {
+  const { t } = useLanguage();
+  const s = t.story;
+
   useEffect(() => {
     const fn = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     document.addEventListener("keydown", fn);
@@ -47,7 +43,6 @@ export default function StoryModal({ onClose }: { onClose: () => void }) {
 
   return (
     <AnimatePresence>
-      {/* Backdrop */}
       <motion.div
         className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
         initial={{ opacity: 0 }}
@@ -57,7 +52,7 @@ export default function StoryModal({ onClose }: { onClose: () => void }) {
         onClick={onClose}
         style={{ backgroundColor: "rgba(5,8,20,0.88)", backdropFilter: "blur(10px)" }}
       >
-        {/* Electric flash overlay */}
+        {/* Electric flash */}
         <motion.div
           className="absolute inset-0 pointer-events-none"
           initial={{ opacity: 0.6 }}
@@ -66,30 +61,20 @@ export default function StoryModal({ onClose }: { onClose: () => void }) {
           style={{ background: "radial-gradient(ellipse at center, rgba(63,169,255,0.25) 0%, transparent 70%)" }}
         />
 
-        {/* Modal panel */}
         <motion.div
           onClick={e => e.stopPropagation()}
           className="relative w-full max-w-2xl max-h-[88vh] overflow-y-auto rounded-2xl"
           initial={{ opacity: 0, scale: 0.8, y: 30 }}
-          animate={{
-            opacity:  [0, 0.5, 0.2, 1],
-            scale:    [0.8, 1.03, 0.98, 1],
-            y:        [30, 0, 0, 0],
-          }}
+          animate={{ opacity: [0, 0.5, 0.2, 1], scale: [0.8, 1.03, 0.98, 1], y: [30, 0, 0, 0] }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
           transition={{ duration: 0.45, times: [0, 0.25, 0.6, 1], ease: "easeOut" }}
           style={{
             backgroundColor: "#0a1228",
             border: "1px solid rgba(63,169,255,0.35)",
-            boxShadow:
-              "0 0 0 1px rgba(63,169,255,0.1), 0 0 40px rgba(63,169,255,0.25), 0 0 100px rgba(63,169,255,0.08), inset 0 0 60px rgba(63,169,255,0.03)",
+            boxShadow: "0 0 0 1px rgba(63,169,255,0.1), 0 0 40px rgba(63,169,255,0.25), 0 0 100px rgba(63,169,255,0.08), inset 0 0 60px rgba(63,169,255,0.03)",
           }}
         >
-          {/* Corner ornaments */}
-          <Corner pos="tl" />
-          <Corner pos="tr" />
-          <Corner pos="bl" />
-          <Corner pos="br" />
+          <Corner pos="tl" /><Corner pos="tr" /><Corner pos="bl" /><Corner pos="br" />
 
           {/* Top power bar */}
           <motion.div
@@ -115,83 +100,42 @@ export default function StoryModal({ onClose }: { onClose: () => void }) {
 
           <div className="relative z-10 p-6 sm:p-8 pt-7">
             {/* Status bar */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="flex items-center gap-2 mb-5"
-            >
-              <motion.div
-                animate={{ opacity: [1, 0.2, 1] }}
-                transition={{ duration: 0.8, repeat: Infinity }}
-              >
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="flex items-center gap-2 mb-5">
+              <motion.div animate={{ opacity: [1, 0.2, 1] }} transition={{ duration: 0.8, repeat: Infinity }}>
                 <Radio size={10} style={{ color: "var(--neon-primary)" }} />
               </motion.div>
-              <span
-                className="text-[9px] uppercase tracking-[0.3em]"
-                style={{ color: "var(--neon-primary)", fontFamily: "var(--font-mono)" }}
-              >
-                VIDI26 EXPRESS · SIGNAL RECEIVED · ĐANG GIẢI MÃ...
+              <span className="text-[9px] uppercase tracking-[0.3em]" style={{ color: "var(--neon-primary)", fontFamily: "var(--font-mono)" }}>
+                {s.status}
               </span>
-              <motion.div
-                animate={{ opacity: [0, 1, 0] }}
-                transition={{ duration: 1, repeat: Infinity, delay: 0.4 }}
-                className="ml-auto text-[9px] font-mono"
-                style={{ color: "var(--neon-primary)" }}
-              >
+              <motion.div animate={{ opacity: [0, 1, 0] }} transition={{ duration: 1, repeat: Infinity, delay: 0.4 }} className="ml-auto text-[9px] font-mono" style={{ color: "var(--neon-primary)" }}>
                 ■
               </motion.div>
             </motion.div>
 
             {/* Title */}
             <div className="flex items-start justify-between mb-7">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.35, duration: 0.4 }}
-              >
+              <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.35, duration: 0.4 }}>
                 <h2
                   className="text-4xl sm:text-5xl font-black uppercase leading-none"
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    color: "var(--text-primary)",
-                    textShadow: "0 0 40px rgba(63,169,255,0.6), 0 0 80px rgba(63,169,255,0.2)",
-                  }}
+                  style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)", textShadow: "0 0 40px rgba(63,169,255,0.6), 0 0 80px rgba(63,169,255,0.2)" }}
                 >
-                  Câu{" "}
-                  <span
-                    style={{
-                      color: "var(--neon-primary)",
-                      textShadow: "0 0 20px var(--neon-primary), 0 0 40px rgba(63,169,255,0.5)",
-                    }}
-                  >
-                    Chuyện
+                  {s.title}{" "}
+                  <span style={{ color: "var(--neon-primary)", textShadow: "0 0 20px var(--neon-primary), 0 0 40px rgba(63,169,255,0.5)" }}>
+                    {s.title_highlight}
                   </span>
                 </h2>
                 <div className="flex items-center gap-1.5 mt-2">
                   <Zap size={10} style={{ color: "var(--accent-gold)" }} />
-                  <span className="text-[9px] uppercase tracking-widest" style={{ color: "var(--accent-gold)", fontFamily: "var(--font-mono)" }}>
-                    VIDI26 · NEXT STATION
-                  </span>
+                  <span className="text-[9px] uppercase tracking-widest" style={{ color: "var(--accent-gold)", fontFamily: "var(--font-mono)" }}>{s.subtitle}</span>
                 </div>
               </motion.div>
 
               <button
                 onClick={onClose}
                 className="rounded-lg p-2 transition-all shrink-0 ml-4"
-                style={{
-                  color: "var(--text-muted)",
-                  backgroundColor: "rgba(63,169,255,0.06)",
-                  border: "1px solid var(--border-subtle)",
-                }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.color = "var(--neon-primary)";
-                  e.currentTarget.style.borderColor = "var(--border-glow)";
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.color = "var(--text-muted)";
-                  e.currentTarget.style.borderColor = "var(--border-subtle)";
-                }}
+                style={{ color: "var(--text-muted)", backgroundColor: "rgba(63,169,255,0.06)", border: "1px solid var(--border-subtle)" }}
+                onMouseEnter={e => { e.currentTarget.style.color = "var(--neon-primary)"; e.currentTarget.style.borderColor = "var(--border-glow)"; }}
+                onMouseLeave={e => { e.currentTarget.style.color = "var(--text-muted)"; e.currentTarget.style.borderColor = "var(--border-subtle)"; }}
               >
                 <X size={16} />
               </button>
@@ -199,19 +143,14 @@ export default function StoryModal({ onClose }: { onClose: () => void }) {
 
             {/* Divider */}
             <motion.div
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ delay: 0.4, duration: 0.4 }}
+              initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: 0.4, duration: 0.4 }}
               className="h-px mb-6"
-              style={{
-                background: "linear-gradient(to right, var(--neon-primary), transparent)",
-                transformOrigin: "left",
-              }}
+              style={{ background: "linear-gradient(to right, var(--neon-primary), transparent)", transformOrigin: "left" }}
             />
 
             {/* Story paragraphs */}
             <div className="space-y-5">
-              {STORY.map((para, i) => (
+              {s.paragraphs.map((para, i) => (
                 <motion.p
                   key={i}
                   initial={{ opacity: 0, y: 12 }}
@@ -227,9 +166,7 @@ export default function StoryModal({ onClose }: { onClose: () => void }) {
 
             {/* Footer */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.9 }}
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }}
               className="mt-8 pt-5 flex items-center justify-between"
               style={{ borderTop: "1px solid var(--border-subtle)" }}
             >
@@ -241,22 +178,17 @@ export default function StoryModal({ onClose }: { onClose: () => void }) {
                   style={{ backgroundColor: "var(--neon-primary)", boxShadow: "0 0 6px var(--neon-primary)" }}
                 />
                 <span className="text-[9px] uppercase tracking-[0.2em]" style={{ color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>
-                  NEXT STOP · VINUNIVERSITY · 09.07.2026
+                  {s.footer_status}
                 </span>
               </div>
               <button
                 onClick={onClose}
                 className="text-[10px] uppercase tracking-widest px-3 py-1.5 rounded-lg transition-all"
-                style={{
-                  color: "var(--neon-primary)",
-                  border: "1px solid var(--border-glow)",
-                  fontFamily: "var(--font-mono)",
-                  backgroundColor: "rgba(63,169,255,0.08)",
-                }}
+                style={{ color: "var(--neon-primary)", border: "1px solid var(--border-glow)", fontFamily: "var(--font-mono)", backgroundColor: "rgba(63,169,255,0.08)" }}
                 onMouseEnter={e => (e.currentTarget.style.backgroundColor = "rgba(63,169,255,0.16)")}
                 onMouseLeave={e => (e.currentTarget.style.backgroundColor = "rgba(63,169,255,0.08)")}
               >
-                Đóng ×
+                {s.close}
               </button>
             </motion.div>
           </div>
