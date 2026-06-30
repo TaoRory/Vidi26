@@ -9,13 +9,14 @@ export const metadata: Metadata = {
 };
 
 const STATIONS = [
-  { num: "01", vi: "Khởi Hành",  en: "Departure",    day: 1 },
-  { num: "02", vi: "Khám Phá",   en: "Discover",     day: 1 },
-  { num: "03", vi: "Tri Thức",   en: "Knowledge",    day: 2 },
-  { num: "04", vi: "Bứt Phá",    en: "Breakthrough", day: 1 },
-  { num: "05", vi: "Lưu Dấu",   en: "Memory",       day: 2 },
-  { num: "06", vi: "Tỏa Sáng",  en: "Shine",        day: 2 },
-  { num: "07", vi: "Tiếp Bước", en: "Next Step",    day: 3 },
+  { num: "01", vi: "Soát Vé",    en: "Boarding Gate",       day: 1 },
+  { num: "02", vi: "Khởi Hành",  en: "Departure Station",   day: 1 },
+  { num: "03", vi: "Đồng Hành",  en: "Companion Station",   day: 1 },
+  { num: "04", vi: "Kích Hoạt",  en: "Ignite Station",      day: 2 },
+  { num: "05", vi: "Kế Tiếp",   en: "Next Station",        day: 2 },
+  { num: "06", vi: "Tri Thức",   en: "Brain Station",       day: 2 },
+  { num: "07", vi: "Lưu Dấu",   en: "Memory Station",      day: 3 },
+  { num: "08", vi: "Tỏa Sáng",  en: "Shine Station",       day: 3 },
 ];
 
 export default function AgendaPage() {
@@ -31,7 +32,7 @@ export default function AgendaPage() {
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-10 pb-8">
           <div className="flex items-center gap-3 mb-3">
-            <Image src="/logo.png" alt="VIDI26" width={44} height={44} style={{ objectFit: "contain" }} />
+            <Image src="/logo-vidi26.svg" alt="VIDI26" width={110} height={52} style={{ objectFit: "contain" }} />
             <div>
               <h1
                 className="text-3xl sm:text-4xl font-black uppercase tracking-wider"

@@ -45,7 +45,7 @@ export default async function LeaderboardPage() {
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-10 pb-8">
           <div className="flex items-center gap-3 mb-2">
-            <Image src="/logo.png" alt="VIDI26" width={44} height={44} style={{ objectFit: "contain" }} />
+            <Image src="/logo-vidi26.svg" alt="VIDI26" width={110} height={52} style={{ objectFit: "contain" }} />
             <div>
               <h1
                 className="text-3xl sm:text-4xl font-black uppercase tracking-wider"

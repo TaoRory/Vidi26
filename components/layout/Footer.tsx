@@ -5,13 +5,14 @@ import Image from "next/image";
 import { Train, MapPin } from "lucide-react";
 
 const STATIONS = [
-  { slug: "khoi-hanh",  vi: "Khởi Hành",  num: "01" },
-  { slug: "kham-pha",   vi: "Khám Phá",   num: "02" },
-  { slug: "tri-thuc",   vi: "Tri Thức",   num: "03" },
-  { slug: "but-pha",    vi: "Bứt Phá",    num: "04" },
-  { slug: "luu-dau",    vi: "Lưu Dấu",    num: "05" },
-  { slug: "toa-sang",   vi: "Tỏa Sáng",   num: "06" },
-  { slug: "tiep-buoc",  vi: "Tiếp Bước",  num: "07" },
+  { slug: "soat-ve",    vi: "Soát Vé",    num: "01" },
+  { slug: "khoi-hanh",  vi: "Khởi Hành",  num: "02" },
+  { slug: "dong-hanh",  vi: "Đồng Hành",  num: "03" },
+  { slug: "kich-hoat",  vi: "Kích Hoạt",  num: "04" },
+  { slug: "ke-tiep",    vi: "Kế Tiếp",    num: "05" },
+  { slug: "tri-thuc",   vi: "Tri Thức",   num: "06" },
+  { slug: "luu-dau",    vi: "Lưu Dấu",    num: "07" },
+  { slug: "toa-sang",   vi: "Tỏa Sáng",   num: "08" },
 ];
 
 export default function Footer() {
@@ -92,14 +93,37 @@ export default function Footer() {
             </div>
 
             <div
-              className="rounded p-3 text-center"
-              style={{ backgroundColor: "var(--bg-deep)", border: "2px solid var(--accent-gold)" }}
+              className="relative rounded-lg overflow-hidden text-center"
+              style={{
+                background: "linear-gradient(135deg, #0a1628 0%, #0d1f3c 50%, #0a1628 100%)",
+                border: "2px solid var(--accent-gold)",
+                boxShadow: "0 0 20px rgba(245,197,24,0.25), inset 0 0 30px rgba(245,197,24,0.04)",
+              }}
             >
-              <div className="text-[9px] uppercase tracking-widest mb-0.5" style={{ color: "var(--text-muted)" }}>FINAL STOP:</div>
-              <div className="text-lg font-black uppercase tracking-wider" style={{ color: "var(--text-primary)" }}>VINUNI</div>
-              <div className="flex items-center justify-center gap-1 mt-0.5">
+              {/* Top stripe */}
+              <div className="py-1 px-3" style={{ background: "rgba(245,197,24,0.15)", borderBottom: "1px solid rgba(245,197,24,0.3)" }}>
+                <span className="text-[8px] uppercase tracking-[0.25em] font-bold" style={{ color: "var(--accent-gold)" }}>
+                  ★ ĐIỂM ĐẾN CUỐI CÙNG ★
+                </span>
+              </div>
+              {/* Main content */}
+              <div className="px-4 py-3">
+                <div className="text-[9px] uppercase tracking-widest mb-1" style={{ color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>FINAL STOP</div>
+                <div
+                  className="text-2xl font-black uppercase tracking-widest"
+                  style={{ color: "var(--text-primary)", textShadow: "0 0 20px rgba(245,197,24,0.4)", fontFamily: "var(--font-display)" }}
+                >
+                  VinUni
+                </div>
+                <div className="text-[9px] uppercase tracking-widest mt-0.5" style={{ color: "var(--text-secondary)" }}>
+                  VinUniversity · Hà Nội
+                </div>
+              </div>
+              {/* Bottom stripe */}
+              <div className="py-1 px-3 flex items-center justify-center gap-1.5" style={{ background: "rgba(245,197,24,0.12)", borderTop: "1px solid rgba(245,197,24,0.3)" }}>
                 <Train size={8} style={{ color: "var(--accent-gold)" }} />
-                <span className="text-[9px] uppercase tracking-widest" style={{ color: "var(--accent-gold)" }}>NEXT STATION</span>
+                <span className="text-[8px] uppercase tracking-[0.2em] font-bold" style={{ color: "var(--accent-gold)" }}>NEXT STATION</span>
+                <Train size={8} style={{ color: "var(--accent-gold)" }} />
               </div>
             </div>
           </div>

@@ -74,23 +74,14 @@ export default function Header() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="flex h-16 items-center justify-between gap-4">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 shrink-0 group">
+          <Link href="/" className="flex items-center shrink-0 group">
             <Image
-              src="/logo.png"
-              alt="VIDI26"
-              width={40}
-              height={40}
-              className="rounded"
+              src="/logo-vidi26.svg"
+              alt="VIDI26 Next Station"
+              width={110}
+              height={52}
               style={{ objectFit: "contain" }}
             />
-            <div className="hidden sm:block">
-              <div className="text-sm font-bold uppercase tracking-wider" style={{ color: "var(--text-primary)" }}>
-                VIDI<span style={{ color: "var(--accent-gold)" }}>26</span>
-              </div>
-              <div className="text-[9px] uppercase tracking-widest" style={{ color: "var(--text-muted)" }}>
-                Next Station
-              </div>
-            </div>
           </Link>
 
           {/* Desktop nav */}

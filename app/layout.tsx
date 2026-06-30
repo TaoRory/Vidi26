@@ -34,6 +34,10 @@ export const metadata: Metadata = {
     description: "VinUni Discovery 2026 — Trạm Kế Tiếp. Where the future begins.",
     type: "website",
   },
+  icons: {
+    icon: "/logo-vidi26.svg",
+    shortcut: "/logo-vidi26.svg",
+  },
 };
 
 export const viewport: Viewport = {
