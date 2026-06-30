@@ -50,31 +50,57 @@ export default function AgendaPage() {
           </p>
 
           {/* Mini route strip */}
-          <div className="flex items-center gap-1 mt-5 overflow-x-auto pb-1">
-            {STATIONS.map((s, i) => (
-              <div key={s.num} className="flex items-center gap-1 shrink-0">
+          <div className="flex justify-center mt-5">
+            <div className="flex items-center gap-1 overflow-x-auto pb-1">
+              {STATIONS.map((s, i) => (
+                <div key={s.num} className="flex items-center gap-1 shrink-0">
+                  <div
+                    className="px-3 py-1.5 rounded-lg text-center"
+                    style={{
+                      backgroundColor: "var(--bg-elevated)",
+                      border: "1px solid var(--border-subtle)",
+                    }}
+                  >
+                    <div className="text-[9px] font-mono" style={{ color: "var(--text-muted)" }}>{s.num}</div>
+                    <div className="text-xs font-bold" style={{ color: "var(--text-primary)" }}>{s.vi}</div>
+                    <div className="text-[9px]" style={{ color: "var(--text-muted)" }}>Day {s.day}</div>
+                  </div>
+                  {i < STATIONS.length - 1 && (
+                    <div style={{ width: 16, height: 1, backgroundColor: "var(--border-glow)", flexShrink: 0 }} />
+                  )}
+                </div>
+              ))}
+
+              {/* Connector to FINAL */}
+              <div style={{ width: 16, height: 1, backgroundColor: "rgba(245,197,24,0.6)", flexShrink: 0 }} />
+
+              {/* FINAL VINUNI — nổi bật */}
+              <div
+                className="shrink-0 relative rounded-xl text-center"
+                style={{
+                  padding: "10px 18px",
+                  background: "linear-gradient(135deg, rgba(245,197,24,0.18) 0%, rgba(245,197,24,0.08) 100%)",
+                  border: "2px solid var(--accent-gold)",
+                  boxShadow: "0 0 20px rgba(245,197,24,0.45), 0 0 6px rgba(245,197,24,0.2) inset",
+                }}
+              >
                 <div
-                  className="px-3 py-1.5 rounded-lg text-center"
+                  className="text-[8px] uppercase tracking-[0.2em] font-bold mb-0.5"
+                  style={{ color: "rgba(245,197,24,0.7)", fontFamily: "var(--font-mono)" }}
+                >
+                  ★ FINAL STOP
+                </div>
+                <div
+                  className="text-base font-black uppercase tracking-wider leading-none"
                   style={{
-                    backgroundColor: "var(--bg-elevated)",
-                    border: "1px solid var(--border-subtle)",
+                    color: "var(--accent-gold)",
+                    fontFamily: "var(--font-display)",
+                    textShadow: "0 0 16px rgba(245,197,24,0.7)",
                   }}
                 >
-                  <div className="text-[9px] font-mono" style={{ color: "var(--text-muted)" }}>{s.num}</div>
-                  <div className="text-xs font-bold" style={{ color: "var(--text-primary)" }}>{s.vi}</div>
-                  <div className="text-[9px]" style={{ color: "var(--text-muted)" }}>Day {s.day}</div>
+                  VinUni
                 </div>
-                {i < STATIONS.length - 1 && (
-                  <div style={{ width: 16, height: 1, backgroundColor: "var(--border-glow)", flexShrink: 0 }} />
-                )}
               </div>
-            ))}
-            <div
-              className="shrink-0 px-3 py-1.5 rounded-lg ml-1"
-              style={{ backgroundColor: "rgba(245,197,24,0.1)", border: "1px solid rgba(245,197,24,0.4)" }}
-            >
-              <div className="text-[9px] font-mono" style={{ color: "var(--accent-gold)" }}>FINAL</div>
-              <div className="text-xs font-black" style={{ color: "var(--accent-gold)" }}>VINUNI</div>
             </div>
           </div>
         </div>
