@@ -51,7 +51,7 @@ export default async function LeaderboardPage() {
                 className="text-3xl sm:text-4xl font-black uppercase tracking-wider"
                 style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}
               >
-                Tỏa <span style={{ color: "var(--accent-gold)" }}>Sáng</span>
+                Leader<span style={{ color: "var(--accent-gold)" }}>board</span>
               </h1>
               <p className="text-sm uppercase tracking-widest" style={{ color: "var(--text-muted)" }}>
                 LEADERBOARD · LIVE
