@@ -59,7 +59,7 @@ const DAY1: AgendaItem[] = [
   },
   {
     time: "18:00 → 20:00",
-    title: "Dinner – Khám phá ẩm thực",
+    title: "Dinner time - Khám phá ẩm thực",
     type: "break",
   },
   {
@@ -169,6 +169,11 @@ function AgendaCard({ item, accent }: { item: AgendaItem; accent: string }) {
   const isBreak   = item.type === "break";
   const stationColor = item.station ? STATION_COLORS[item.station] ?? accent : accent;
 
+  // Station items: big title = "Trạm X", activity tag = item.title
+  // Non-station items: big title = item.title, no tag
+  const mainTitle  = item.station ? `Trạm ${item.station}` : item.title;
+  const activityTag = item.station ? item.title : null;
+
   return (
     <div
       className="rounded-xl p-4 sm:p-5 transition-all"
@@ -208,19 +213,18 @@ function AgendaCard({ item, accent }: { item: AgendaItem; accent: string }) {
               style={{ color: isSpecial ? "var(--text-primary)" : "var(--text-secondary)" }}
             >
               {item.highlight && <Star size={12} className="inline mr-1.5 mb-0.5" style={{ color: stationColor }} />}
-              {item.title}
+              {mainTitle}
             </h3>
-            {item.station && (
+            {activityTag && (
               <span
-                className="text-[9px] uppercase tracking-widest px-2 py-0.5 rounded-full font-medium"
+                className="text-[9px] px-2 py-0.5 rounded-full font-medium"
                 style={{
-                  backgroundColor: stationColor + "18",
-                  color: stationColor,
-                  border: `1px solid ${stationColor}44`,
+                  backgroundColor: "rgba(255,255,255,0.06)",
+                  color: "var(--text-muted)",
+                  border: "1px solid var(--border-subtle)",
                 }}
               >
-                <MapPin size={7} className="inline mr-0.5" />
-                {item.station}
+                {activityTag}
               </span>
             )}
           </div>
