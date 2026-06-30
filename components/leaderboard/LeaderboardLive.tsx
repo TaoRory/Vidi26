@@ -8,6 +8,7 @@ import TopThreeCards from "./TopThreeCards";
 import DepartureBoardRow from "./DepartureBoardRow";
 import type { LeaderboardEntry, Station } from "@/lib/supabase/types";
 import GlowPanel from "@/components/theme/GlowPanel";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const POLL_INTERVAL = 10_000;
 
@@ -17,6 +18,8 @@ interface LeaderboardLiveProps {
 }
 
 export default function LeaderboardLive({ initialData, stations }: LeaderboardLiveProps) {
+  const { lang, t } = useLanguage();
+  const ll = t.leaderboard_live;
   const [data, setData] = useState<LeaderboardEntry[]>(initialData);
   const [filter, setFilter] = useState<string>("all");
   const [loading, setLoading] = useState(false);
@@ -64,7 +67,7 @@ export default function LeaderboardLive({ initialData, stations }: LeaderboardLi
                 border: filter === "all" ? "1px solid var(--neon-primary)" : "1px solid var(--border-subtle)",
               }}
             >
-              Tất cả
+              {ll.all}
             </button>
             {stations.map((s) => (
               <button
@@ -92,7 +95,7 @@ export default function LeaderboardLive({ initialData, stations }: LeaderboardLi
 
           {lastUpdate && (
             <span className="text-xs" style={{ color: "var(--text-muted)" }}>
-              {lastUpdate.toLocaleTimeString("vi-VN")}
+              {lastUpdate.toLocaleTimeString(lang === "en" ? "en-US" : "vi-VN")}
             </span>
           )}
 
@@ -101,7 +104,7 @@ export default function LeaderboardLive({ initialData, stations }: LeaderboardLi
             disabled={loading}
             className="p-1.5 rounded transition-colors"
             style={{ color: "var(--text-muted)", backgroundColor: "var(--bg-elevated)" }}
-            title="Làm mới"
+            title={ll.refresh}
           >
             <RefreshCw size={12} className={loading ? "animate-spin" : ""} />
           </button>
@@ -119,7 +122,7 @@ export default function LeaderboardLive({ initialData, stations }: LeaderboardLi
               className="w-2 h-2 rounded-full inline-block"
               style={{ backgroundColor: "var(--neon-primary)", animation: "pulse 2s infinite" }}
             />
-            Bảng xếp hạng — {data.length} đội
+            {ll.board_label} — {data.length} {ll.teams_unit}
           </div>
           <div className="space-y-2">
             <AnimatePresence mode="popLayout">
@@ -134,7 +137,7 @@ export default function LeaderboardLive({ initialData, stations }: LeaderboardLi
       {data.length === 0 && (
         <GlowPanel>
           <p className="text-center py-12" style={{ color: "var(--text-muted)" }}>
-            Đang đồng bộ tín hiệu... quay lại sau
+            {ll.empty}
           </p>
         </GlowPanel>
       )}

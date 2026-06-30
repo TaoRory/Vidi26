@@ -52,6 +52,27 @@ export const translations = {
       description:
         "Bảng xếp hạng theo thời gian thực. Mỗi đội vượt qua thử thách, điểm cập nhật ngay lập tức.",
     },
+    home: {
+      announcements_title: "Thông Báo",
+      see_all: "Xem tất cả",
+      no_data: "Trạm này chưa có dữ liệu, quay lại sau",
+      pinned: "Ghim",
+      leaderboard_title: "Bảng Xếp Hạng",
+      view_full: "Xem full",
+      view_full_leaderboard: "Xem bảng xếp hạng đầy đủ",
+    },
+    leaderboard_live: {
+      all: "Tất cả",
+      board_label: "Bảng xếp hạng",
+      teams_unit: "đội",
+      empty: "Đang đồng bộ tín hiệu... quay lại sau",
+      refresh: "Làm mới",
+    },
+    mini_leaderboard: {
+      loading: "Đang đồng bộ tín hiệu...",
+      challenges: "thử thách",
+      updated: "cập nhật",
+    },
     footer: {
       journey_label: "Hành Trình",
       links_label: "Liên kết",
@@ -121,6 +142,27 @@ export const translations = {
     leaderboard: {
       description:
         "Real-time leaderboard. Every team that completes a challenge sees their score update instantly.",
+    },
+    home: {
+      announcements_title: "Announcements",
+      see_all: "See all",
+      no_data: "No data here yet, check back soon",
+      pinned: "Pinned",
+      leaderboard_title: "Leaderboard",
+      view_full: "See all",
+      view_full_leaderboard: "View full leaderboard",
+    },
+    leaderboard_live: {
+      all: "All",
+      board_label: "Leaderboard",
+      teams_unit: "teams",
+      empty: "Syncing data... check back soon",
+      refresh: "Refresh",
+    },
+    mini_leaderboard: {
+      loading: "Loading...",
+      challenges: "challenges",
+      updated: "updated",
     },
     footer: {
       journey_label: "Journey",

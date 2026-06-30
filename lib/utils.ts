@@ -21,10 +21,17 @@ export function getTeamGradient(colorHex: string | null): string {
   return `from-[${colorHex}33] to-bg-elevated`;
 }
 
-export function formatRelativeTime(date: string | null): string {
+export function formatRelativeTime(date: string | null, lang: "vi" | "en" = "vi"): string {
   if (!date) return "—";
   const diff = Date.now() - new Date(date).getTime();
   const minutes = Math.floor(diff / 60000);
+  if (lang === "en") {
+    if (minutes < 1) return "just now";
+    if (minutes < 60) return `${minutes}m ago`;
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) return `${hours}h ago`;
+    return new Date(date).toLocaleDateString("en-US");
+  }
   if (minutes < 1) return "vừa xong";
   if (minutes < 60) return `${minutes} phút trước`;
   const hours = Math.floor(minutes / 60);
