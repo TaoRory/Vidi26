@@ -141,6 +141,6 @@ export const translations = {
       station_prefix: "Station",
     },
   },
-} as const;
+};
 
-export type T = (typeof translations)["vi"];
+export type T = typeof translations["vi"];
