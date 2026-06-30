@@ -53,9 +53,6 @@ export default async function LeaderboardPage() {
               >
                 Leader<span style={{ color: "var(--accent-gold)" }}>board</span>
               </h1>
-              <p className="text-sm uppercase tracking-widest" style={{ color: "var(--text-muted)" }}>
-                LEADERBOARD · LIVE
-              </p>
             </div>
           </div>
           <p className="text-sm sm:text-base" style={{ color: "var(--text-secondary)" }}>
