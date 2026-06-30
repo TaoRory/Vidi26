@@ -52,8 +52,8 @@ export default function HeroSection() {
         className="hidden lg:block absolute pointer-events-none"
         style={{
           /* vw-based top: background image scales with vw, so LEXCE tracks the train rail */
-          top: "28vw",
-          right: "14%",
+          top: "16vw",
+          right: "8%",
           width: "38vw",
           height: "44vw",
           zIndex: 2,
