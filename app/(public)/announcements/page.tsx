@@ -1,5 +1,6 @@
-﻿import Link from "next/link";
-import { Pin, ArrowRight, Megaphone } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import { Pin, Megaphone } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { TrainTrack } from "@/components/theme/TrainTrack";
 import type { Announcement } from "@/lib/supabase/types";
@@ -57,8 +58,8 @@ export default async function AnnouncementsPage() {
         <TrainTrack animated className="mt-2" />
       </div>
 
-      {/* List */}
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 py-10">
+      {/* Feed */}
+      <div className="mx-auto max-w-2xl px-4 sm:px-6 py-10">
         {list.length === 0 ? (
           <div
             className="rounded-xl p-12 text-center"
@@ -68,56 +69,94 @@ export default async function AnnouncementsPage() {
             <p style={{ color: "var(--text-muted)" }}>Trạm này chưa có dữ liệu, quay lại sau</p>
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-6">
             {list.map((ann) => {
-              const excerpt = ann.body_md
+              const caption = ann.body_md
                 .replace(/#{1,3}\s/g, "")
                 .replace(/\*\*/g, "")
                 .replace(/\*/g, "")
-                .slice(0, 160);
+                .replace(/\n+/g, " ")
+                .slice(0, 220);
+
+              const dateStr = ann.published_at
+                ? new Date(ann.published_at).toLocaleDateString("vi-VN", {
+                    day: "2-digit", month: "2-digit", year: "numeric",
+                    hour: "2-digit", minute: "2-digit",
+                  })
+                : null;
 
               return (
-                <Link key={ann.id} href={`/announcements/${ann.slug}`} className="block group">
-                  <div
-                    className="rounded-xl p-5 transition-all duration-200"
-                    style={{
-                      backgroundColor: "var(--bg-surface)",
-                      border: `1px solid ${ann.pinned ? "rgba(245,197,24,0.3)" : "var(--border-subtle)"}`,
-                    }}
-                  >
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex-1 min-w-0">
+                <div
+                  key={ann.id}
+                  className="rounded-2xl overflow-hidden"
+                  style={{ backgroundColor: "var(--bg-surface)", border: "1px solid var(--border-subtle)" }}
+                >
+                  {/* Post header */}
+                  <div className="flex items-center gap-3 px-4 pt-4 pb-3">
+                    <div
+                      className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
+                      style={{ backgroundColor: "rgba(63,169,255,0.15)", border: "1.5px solid var(--neon-primary)" }}
+                    >
+                      <Image src="/logo.png" alt="VIDI26" width={28} height={28} className="rounded-full object-contain" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="font-bold text-sm" style={{ color: "var(--text-primary)" }}>VIDI26 Express</span>
                         {ann.pinned && (
-                          <div
-                            className="inline-flex items-center gap-1 text-[9px] uppercase tracking-widest px-2 py-0.5 rounded mb-2"
+                          <span
+                            className="inline-flex items-center gap-1 text-[9px] uppercase tracking-widest px-2 py-0.5 rounded"
                             style={{ backgroundColor: "rgba(245,197,24,0.1)", color: "var(--accent-gold)", border: "1px solid rgba(245,197,24,0.3)" }}
                           >
-                            <Pin size={9} /> Ghim
-                          </div>
+                            <Pin size={8} /> Ghim
+                          </span>
                         )}
-                        <h2
-                          className="text-base font-bold mb-1 truncate transition-colors"
-                          style={{ color: "var(--text-primary)" }}
-                        >
-                          {ann.title}
-                        </h2>
-                        <p className="text-sm line-clamp-2" style={{ color: "var(--text-secondary)" }}>
-                          {excerpt}…
-                        </p>
-                        <p className="text-xs mt-2" style={{ color: "var(--text-muted)" }}>
-                          {ann.published_at
-                            ? new Date(ann.published_at).toLocaleDateString("vi-VN", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" })
-                            : "—"}
-                        </p>
                       </div>
-                      <ArrowRight
-                        size={18}
-                        className="shrink-0 mt-1 transition-transform group-hover:translate-x-1"
-                        style={{ color: "var(--neon-primary)" }}
-                      />
+                      {dateStr && (
+                        <p className="text-xs" style={{ color: "var(--text-muted)" }}>{dateStr}</p>
+                      )}
                     </div>
                   </div>
-                </Link>
+
+                  {/* Caption preview */}
+                  <div className="px-4 pb-3">
+                    <p className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                      {caption}…{" "}
+                      <Link href={`/announcements/${ann.slug}`} className="font-semibold" style={{ color: "var(--neon-primary)" }}>
+                        Xem thêm
+                      </Link>
+                    </p>
+                  </div>
+
+                  {/* Image */}
+                  {ann.cover_url && (
+                    <Link href={`/announcements/${ann.slug}`} className="block">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={ann.cover_url}
+                        alt={ann.title}
+                        className="w-full object-cover"
+                        style={{ maxHeight: 480 }}
+                      />
+                    </Link>
+                  )}
+
+                  {/* Post footer */}
+                  <div
+                    className="px-4 py-3 flex items-center justify-between"
+                    style={{ borderTop: "1px solid var(--border-subtle)" }}
+                  >
+                    <span className="text-xs font-semibold" style={{ color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>
+                      VIDI26 · NEXT STATION
+                    </span>
+                    <Link
+                      href={`/announcements/${ann.slug}`}
+                      className="text-xs font-semibold px-3 py-1 rounded-lg transition-colors"
+                      style={{ backgroundColor: "rgba(63,169,255,0.1)", color: "var(--neon-primary)", border: "1px solid var(--border-subtle)" }}
+                    >
+                      Đọc tiếp →
+                    </Link>
+                  </div>
+                </div>
               );
             })}
           </div>
