@@ -16,7 +16,7 @@ export default function HeroSection() {
         style={{
           backgroundImage: "url('/kv-background.svg')",
           backgroundSize: "115% auto",
-          backgroundPosition: "65% 20%",
+          backgroundPosition: "65% top",
           backgroundRepeat: "no-repeat",
           backgroundColor: "#050814",
         }}
