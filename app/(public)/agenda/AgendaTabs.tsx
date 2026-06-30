@@ -131,18 +131,6 @@ const DAY2: AgendaItem[] = [
     station: "Tỏa Sáng",
     highlight: true,
     type: "special",
-    sub: [
-      "Ăn tối và giao lưu",
-      "Chấm điểm và công bố kết quả thử thách",
-      "Trao thưởng — các đội/cá nhân nổi bật",
-      "Tổng kết hành trình VIDI26",
-    ],
-    sub_en: [
-      "Dinner and networking",
-      "Challenge scoring and results reveal",
-      "Awards — outstanding teams & individuals",
-      "VIDI26 journey closing ceremony",
-    ],
   },
   {
     time: "22:00",
