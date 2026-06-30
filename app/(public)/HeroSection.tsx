@@ -166,7 +166,7 @@ export default function HeroSection() {
             transition={{ duration: 0.7, delay: 0.35 }}
             className="flex flex-wrap gap-3"
           >
-            <Link href="/leaderboard">
+            <Link href="/agenda">
               <NeonButton variant="primary" size="lg">
                 <Train size={16} /> {t.hero.cta_board}
               </NeonButton>
