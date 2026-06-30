@@ -1,8 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { Clock, MapPin, Star } from "lucide-react";
+import { Clock, MapPin, Star, ChevronDown } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+
+type AccordionSubGroup = { label: string; items: string[] };
+type AccordionGroup = {
+  title: string;
+  time?: string;
+  items?: string[];
+  sub_groups?: AccordionSubGroup[];
+};
 
 type AgendaItem = {
   time?: string;
@@ -14,6 +22,7 @@ type AgendaItem = {
   sub?: string[];
   sub_en?: string[];
   type?: "break" | "special" | "default";
+  accordion?: AccordionGroup[];
 };
 
 const DAY1: AgendaItem[] = [
@@ -96,12 +105,61 @@ const DAY2: AgendaItem[] = [
     type: "break",
   },
   {
-    time: "10:00 → 12:00",
+    time: "09:00 → 12:00",
     title: "Demo class + Workshop",
     location: "C Building",
     station: "Tri Thức",
     highlight: true,
     type: "special",
+    accordion: [
+      {
+        title: "WORKSHOP",
+        time: "09:00 → 10:00",
+        items: [
+          "Bổ sung thông tin",
+          "W1 - Academic Life 101 - Prof. Lien Trinh",
+          "W2 - Resilience - Ms. Ngo Van Dung",
+          "W3 - A Jigsaw of Culture: Explore VinUni International Community - VISA",
+          "W4 - The Great Library Hunt - LLR",
+        ],
+      },
+      {
+        title: "DEMO CLASS",
+        time: "10:00 → 12:00",
+        sub_groups: [
+          {
+            label: "CBM",
+            items: [
+              'L1 - "Making 100 Million Dong: Starting a Part-Time Business for 2.5 Million Dong" - Marc Kramer',
+              'L2 - "Why Do Business Models Matter? The What, How, Who, and Why Framework for Understanding Any Business Model" - Dinh Anh Tuan',
+              'L3 - "Global Supply Chain and Strategy" - Nguyen Thu Giang',
+            ],
+          },
+          {
+            label: "CAS",
+            items: [
+              'L4 - "From TikTok Views to AI Media: How Stories Shape Attention, Meaning, and Careers" - Ricardo Braganca',
+              'L5 - "Introduction to Economics" - Le Duy Anh',
+              'L6 - "From Factory Floors to Artificial Intelligence: Do We Need Psychology at Work?" - Claire Hardy',
+            ],
+          },
+          {
+            label: "CECS",
+            items: [
+              "L7 | 10:00 - 11:00 | General overview of mechanical engineering - Simon Park",
+              "L8 | 11:00 - 12:00 | Introduction about computing and the latest AI technologies with live demonstrations - Mo El-Haj",
+            ],
+          },
+          {
+            label: "CHS",
+            items: [
+              "L9 - Cardiopulmonary Resuscitation (CPR) - Nguyễn Thị Thúy Nga",
+              "L10 - Anatomy - Trần Lê Đình Duy",
+            ],
+          },
+        ],
+      },
+    ],
   },
   {
     time: "12:00 → 13:30",
@@ -178,6 +236,7 @@ const STATION_EN: Record<string, string> = {
 
 function AgendaCard({ item, accent }: { item: AgendaItem; accent: string }) {
   const { lang, t } = useLanguage();
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
   const isSpecial = item.type === "special";
   const isBreak   = item.type === "break";
   const stationColor = item.station ? STATION_COLORS[item.station] ?? accent : accent;
@@ -263,6 +322,81 @@ function AgendaCard({ item, accent }: { item: AgendaItem; accent: string }) {
                 </li>
               ))}
             </ul>
+          )}
+
+          {/* Accordion sections */}
+          {item.accordion && item.accordion.length > 0 && (
+            <div className="mt-3 space-y-2" style={{ borderTop: "1px solid var(--border-subtle)", paddingTop: 12 }}>
+              {item.accordion.map((group, gi) => {
+                const isOpen = openIdx === gi;
+                return (
+                  <div key={gi}>
+                    <button
+                      onClick={() => setOpenIdx(isOpen ? null : gi)}
+                      className="w-full flex items-center justify-between gap-2 px-3 py-2 rounded-lg text-xs font-semibold transition-all"
+                      style={{
+                        backgroundColor: isOpen ? stationColor + "18" : "rgba(255,255,255,0.04)",
+                        color: isOpen ? stationColor : "var(--text-secondary)",
+                        border: `1px solid ${isOpen ? stationColor + "55" : "var(--border-subtle)"}`,
+                      }}
+                    >
+                      <span className="flex items-center gap-2">
+                        <span className="uppercase tracking-wider">{group.title}</span>
+                        {group.time && (
+                          <span className="font-mono text-[9px]" style={{ color: "var(--text-muted)" }}>
+                            {group.time}
+                          </span>
+                        )}
+                      </span>
+                      <ChevronDown
+                        size={13}
+                        style={{
+                          transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+                          transition: "transform 0.2s",
+                          flexShrink: 0,
+                        }}
+                      />
+                    </button>
+
+                    {isOpen && (
+                      <div className="mt-2 pl-3 space-y-3">
+                        {/* Flat items */}
+                        {group.items && group.items.length > 0 && (
+                          <ul className="space-y-1.5">
+                            {group.items.map((it, ii) => (
+                              <li key={ii} className="flex items-start gap-2 text-xs" style={{ color: "var(--text-secondary)" }}>
+                                <span style={{ color: stationColor, marginTop: 2, flexShrink: 0 }}>▸</span>
+                                <span>{it}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+
+                        {/* Sub-groups (colleges) */}
+                        {group.sub_groups && group.sub_groups.map((sg, si) => (
+                          <div key={si}>
+                            <div
+                              className="text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded inline-block mb-1.5"
+                              style={{ backgroundColor: stationColor + "20", color: stationColor }}
+                            >
+                              {sg.label}
+                            </div>
+                            <ul className="space-y-1.5">
+                              {sg.items.map((it, ii) => (
+                                <li key={ii} className="flex items-start gap-2 text-xs" style={{ color: "var(--text-secondary)" }}>
+                                  <span style={{ color: stationColor, marginTop: 2, flexShrink: 0 }}>▸</span>
+                                  <span>{it}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           )}
         </div>
       </div>
