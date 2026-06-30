@@ -58,7 +58,7 @@ export default function Footer() {
                       className="text-xs transition-colors group-hover:text-neon-bright"
                       style={{ color: i === STATIONS.length - 1 ? "var(--accent-gold)" : "var(--text-secondary)" }}
                     >
-                      {s.vi}
+                      Trạm {s.vi}
                     </span>
                     {i === STATIONS.length - 1 && <MapPin size={10} style={{ color: "var(--accent-gold)" }} />}
                   </Link>
