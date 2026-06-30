@@ -6,7 +6,7 @@ import { Clock, MapPin, Star } from "lucide-react";
 type AgendaItem = {
   time?: string;
   title: string;
-  description?: string;
+  location?: string;
   station?: string;
   highlight?: boolean;
   sub?: string[];
@@ -16,159 +16,152 @@ type AgendaItem = {
 const DAY1: AgendaItem[] = [
   {
     time: "07:00 → 10:00",
-    title: "Trạm Soát Vé",
-    station: "Khởi Hành",
-    description: "Điểm check-in mở đầu hành trình — nhận boarding pass, làm quen với cohort và chính thức \"lên chuyến tàu\" VIDI26.",
-    type: "default",
+    title: "Arrival & Check-in",
+    location: "Ký túc xá (JA, JB)",
+    station: "Soát Vé",
+    highlight: true,
+    type: "special",
   },
   {
     time: "09:00 → 10:30",
-    title: "Parent Session",
-    description: "Chương trình dành riêng cho phụ huynh song song với hoạt động đón tiếp.",
-    type: "break",
-  },
-  {
-    time: "10:00 → 11:30",
-    title: "Trạm Khởi Hành — Opening Ceremony",
-    station: "Khởi Hành",
-    description: "Mở đầu chương trình, truyền tải tinh thần chào đón và giúp học sinh hiểu bối cảnh, mục tiêu của VinUni Discovery.",
-    highlight: true,
-    type: "special",
-  },
-  {
-    time: "Cả ngày",
-    title: "Nhiệm Vụ Lưu Dấu — Vlog Challenge",
-    station: "Lưu Dấu",
-    description: "Khuyến khích học sinh quan sát, ghi lại trải nghiệm và sáng tạo nội dung theo góc nhìn cá nhân/nhóm — tư liệu cho Gala Dinner.",
+    title: "Parent Session – VinUni Community",
+    location: "JA102",
+    station: "Đồng Hành",
     type: "default",
   },
   {
-    time: "14:00 → 17:00",
-    title: "Trạm Bứt Phá — Team Building",
-    station: "Bứt Phá",
-    description: "Tăng tinh thần đồng đội giữa các thành viên, tạo năng lượng cho ngày đầu tiên thông qua các thử thách có tính tương tác.",
+    time: "10:00 → 11:30",
+    title: "Opening Ceremony",
+    location: "Auditorium",
+    station: "Khởi Hành",
     highlight: true,
     type: "special",
   },
   {
-    time: "16:00 → 18:00",
-    title: "Trạm Năng Lượng",
-    description: "Pool activities + Nghỉ ngơi — nạp lại năng lượng sau buổi team building.",
+    time: "12:00 → 14:00",
+    title: "Lunchbreak",
+    location: "Ký túc xá + Nhà E",
+    type: "break",
+  },
+  {
+    time: "14:00 → 16:30",
+    title: "Teambuilding",
+    location: "K-Complex",
+    station: "Kích Hoạt",
+    highlight: true,
+    type: "special",
+  },
+  {
+    time: "16:30 → 18:00",
+    title: "Sport activities + Nghỉ ngơi",
+    location: "K-Complex",
+    type: "break",
+  },
+  {
+    time: "18:00 → 20:00",
+    title: "Dinner – Khám phá ẩm thực",
     type: "break",
   },
   {
     time: "20:00 → 22:00",
-    title: "Scavenger Hunt — Next Station",
-    description: "Khép lại ngày đầu bằng không gian nhẹ nhàng để học sinh thư giãn, giao lưu, chia sẻ cảm xúc và tăng sự gắn kết.",
+    title: "Scavenger Hunt",
+    location: "I Building",
+    station: "Kế Tiếp",
+    highlight: true,
     type: "special",
+  },
+  {
+    time: "22:00",
+    title: "Kết thúc lịch trình ngày 1",
+    location: "Ký túc xá",
+    type: "break",
   },
 ];
 
 const DAY2: AgendaItem[] = [
   {
-    time: "05:30 → 07:00",
-    title: "Trạm Nhiên Liệu — Morning Run",
-    description: "Chạy bộ buổi sáng ra bờ sông (tuỳ chọn) — hoạt động khởi động ngày mới cho các bạn muốn tham gia.",
+    time: "05:30 → 06:00",
+    title: "Morning Run",
     type: "break",
   },
   {
-    time: "07:00 → 08:30",
-    title: "Ăn Sáng",
+    time: "08:00 → 10:00",
+    title: "Breakfast",
     type: "break",
   },
   {
-    time: "08:30 → 11:30",
-    title: "Trạm Tri Thức — Demo Class & Workshop",
+    time: "10:00 → 12:00",
+    title: "Demo class + Workshop",
+    location: "C Building",
     station: "Tri Thức",
-    description: "Chuỗi 4 workshop giúp học sinh chuẩn bị tâm thế cho đời sống đại học.",
     highlight: true,
     type: "special",
-    sub: [
-      "Mental Health & Preparing for University Life — Chuẩn bị sức khoẻ tinh thần và tâm thế khi bước vào đại học",
-      "Financial Management in University — Hướng dẫn quản lý tài chính cá nhân trong môi trường đại học",
-      "IKIGAI — Giúp học sinh khám phá bản thân, sở thích và định hướng cá nhân",
-      "Entrepreneurship — Khơi gợi tư duy sáng tạo, tinh thần chủ động và khởi nghiệp",
-    ],
   },
   {
-    time: "12:00",
-    title: "Deadline Nộp Vlog",
+    time: "12:00 → 13:30",
+    title: "Lunchbreak",
+    location: "Ký túc xá + Nhà E",
+    type: "break",
+  },
+  {
+    time: "13:30 → 14:30",
+    title: "Reflection session",
     station: "Lưu Dấu",
-    description: "Các đội gửi video vlog ghi lại hành trình trước 12:00 ngày 2.",
     highlight: true,
-    type: "default",
+    type: "special",
   },
   {
-    time: "13:30 → 18:00",
-    title: "Reflection & Final Preparation",
-    station: "Lưu Dấu",
-    description: "Tạo không gian để học sinh nhìn lại hành trình, hoàn thiện sản phẩm đội và chuẩn bị cho Gala Dinner.",
-    type: "default",
-    sub: [
-      "Reflection Session — Học sinh viết cảm nhận lên \"cuống vé\"",
-      "Hoạt động tập thể (pending) — Hoạt động bổ trợ trước Gala Dinner",
-      "Trao LEXCE buổi chiều",
-    ],
+    time: "14:30 → 17:30",
+    title: "Tập văn nghệ + Tổng duyệt + Nghỉ ngơi tự do",
+    location: "Auditorium + Ký túc xá",
+    type: "break",
   },
   {
-    time: "18:00 → 22:00",
-    title: "Gala Dinner — Tỏa Sáng",
+    time: "18:30 → 22:00",
+    title: "Gala Dinner + Trao thưởng",
+    location: "Auditorium",
     station: "Tỏa Sáng",
-    description: "Tổng kết hành trình, ghi nhận sự tham gia của các đội và tạo điểm nhấn cảm xúc cho chương trình.",
     highlight: true,
     type: "special",
     sub: [
       "Ăn tối và giao lưu",
-      "Trình chiếu vlog của các đội",
       "Chấm điểm và công bố kết quả thử thách",
       "Trao thưởng — các đội/cá nhân nổi bật",
-      "Tổng kết hành trình 2 ngày tại VinUni Discovery",
+      "Tổng kết hành trình VIDI26",
     ],
+  },
+  {
+    time: "22:00",
+    title: "Kết thúc lịch trình ngày 2",
+    location: "Ký túc xá",
+    type: "break",
   },
 ];
 
 const DAY3: AgendaItem[] = [
   {
-    time: "05:30 → 07:00",
-    title: "Trạm Nhiên Liệu — Morning Run",
-    description: "Buổi chạy bộ cuối cùng — tuỳ chọn.",
-    type: "break",
-  },
-  {
-    time: "07:00 → 08:30",
-    title: "Ăn Sáng",
-    type: "break",
-  },
-  {
-    time: "09:00 → 11:00",
-    title: "Trạm Tiếp Bước — Next Step",
-    station: "Tiếp Bước",
-    description: "Hành trình mới bắt đầu tại VinUni — học sinh nhận thông tin về năm học đầu tiên và chia tay VIDI26.",
-    highlight: true,
-    type: "special",
-  },
-  {
-    time: "11:00 → 12:00",
-    title: "Check-out & Chia Tay",
-    description: "Kết thúc chương trình, học sinh check-out và về nhà.",
+    time: "07:00 → 10:00",
+    title: "Check-out",
+    location: "Ký túc xá",
     type: "default",
   },
 ];
 
 const DAYS = [
-  { label: "Ngày 1", sublabel: "17.06", color: "var(--neon-primary)", items: DAY1 },
-  { label: "Ngày 2", sublabel: "18.06", color: "var(--accent-sunset)", items: DAY2 },
-  { label: "Ngày 3", sublabel: "19.06", color: "var(--accent-gold)", items: DAY3 },
+  { label: "Ngày 1", sublabel: "09.07", color: "var(--neon-primary)",   items: DAY1 },
+  { label: "Ngày 2", sublabel: "10.07", color: "var(--accent-sunset)",  items: DAY2 },
+  { label: "Ngày 3", sublabel: "11.07", color: "var(--accent-gold)",    items: DAY3 },
 ];
 
 const STATION_COLORS: Record<string, string> = {
-  "Khởi Hành":  "var(--neon-primary)",
-  "Khám Phá":   "var(--neon-bright)",
-  "Tri Thức":   "#a78bfa",
-  "Bứt Phá":    "var(--accent-sunset)",
-  "Lưu Dấu":   "#34d399",
-  "Tỏa Sáng":  "var(--accent-gold)",
-  "Tiếp Bước": "#f472b6",
+  "Soát Vé":   "var(--neon-primary)",
+  "Khởi Hành": "var(--neon-bright)",
+  "Đồng Hành": "#a78bfa",
+  "Kích Hoạt": "var(--accent-sunset)",
+  "Kế Tiếp":   "#f472b6",
+  "Tri Thức":  "#60a5fa",
+  "Lưu Dấu":  "#34d399",
+  "Tỏa Sáng": "var(--accent-gold)",
 };
 
 function AgendaCard({ item, accent }: { item: AgendaItem; accent: string }) {
@@ -231,9 +224,10 @@ function AgendaCard({ item, accent }: { item: AgendaItem; accent: string }) {
               </span>
             )}
           </div>
-          {item.description && (
-            <p className="text-xs leading-relaxed mb-2" style={{ color: "var(--text-muted)" }}>
-              {item.description}
+          {item.location && (
+            <p className="text-xs mb-1.5 flex items-center gap-1" style={{ color: "var(--text-muted)" }}>
+              <MapPin size={9} style={{ flexShrink: 0 }} />
+              {item.location}
             </p>
           )}
           {item.sub && item.sub.length > 0 && (
@@ -283,12 +277,10 @@ export default function AgendaTabs() {
 
       {/* Timeline */}
       <div className="relative">
-        {/* Vertical rail */}
         <div
           className="absolute left-0 top-0 bottom-0 w-px hidden sm:block"
           style={{ background: `linear-gradient(to bottom, ${day.color}88, transparent)`, left: 12 }}
         />
-
         <div className="space-y-3 sm:pl-8">
           {day.items.map((item, i) => (
             <AgendaCard key={i} item={item} accent={day.color} />
