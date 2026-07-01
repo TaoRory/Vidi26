@@ -6,13 +6,13 @@ import { Train, MapPin } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const STATIONS = [
-  { slug: "khoi-hanh",  vi: "Khởi Hành",  en: "Departure",  num: "01" },
-  { slug: "dong-hanh",  vi: "Đồng Hành",  en: "Companion",  num: "02" },
-  { slug: "kich-hoat",  vi: "Kích Hoạt",  en: "Ignite",     num: "03" },
-  { slug: "ke-tiep",    vi: "Kế Tiếp",    en: "Wayfinder Station",  num: "04" },
-  { slug: "tri-thuc",   vi: "Tri Thức",   en: "Discovery Station",  num: "05" },
-  { slug: "luu-dau",    vi: "Lưu Dấu",    en: "Memory",     num: "06" },
-  { slug: "toa-sang",   vi: "Tỏa Sáng",   en: "Shine",      num: "07" },
+  { slug: "khoi-hanh",  vi: "Khởi Hành",  en: "Departure",   num: "01" },
+  { slug: "dong-hanh",  vi: "Đồng Hành",  en: "Companion",   num: "02" },
+  { slug: "kich-hoat",  vi: "Kích Hoạt",  en: "Ignition",    num: "03" },
+  { slug: "ke-tiep",    vi: "Kế Tiếp",    en: "Wayfinder",   num: "04" },
+  { slug: "tri-thuc",   vi: "Tri Thức",   en: "Discovery",   num: "05" },
+  { slug: "luu-dau",    vi: "Lưu Dấu",    en: "Memory",      num: "06" },
+  { slug: "toa-sang",   vi: "Tỏa Sáng",   en: "Radiance",    num: "07" },
 ];
 
 export default function Footer() {
@@ -60,7 +60,7 @@ export default function Footer() {
                       className="text-xs transition-colors group-hover:text-neon-bright"
                       style={{ color: i === STATIONS.length - 1 ? "var(--accent-gold)" : "var(--text-secondary)" }}
                     >
-                      {lang === "en" && s.en.includes("Station") ? s.en : `${f.station_prefix} ${lang === "en" ? s.en : s.vi}`}
+                      {lang === "en" ? `${s.en} Station` : `${f.station_prefix} ${s.vi}`}
                     </span>
                     {i === STATIONS.length - 1 && <MapPin size={10} style={{ color: "var(--accent-gold)" }} />}
                   </Link>

@@ -226,15 +226,13 @@ const STATION_COLORS: Record<string, string> = {
 const STATION_EN: Record<string, string> = {
   "Khởi Hành": "Departure",
   "Đồng Hành": "Companion",
-  "Kích Hoạt": "Ignite",
-  "Kế Tiếp":   "Wayfinder Station",
-  "Tri Thức":  "Discovery Station",
+  "Kích Hoạt": "Ignition",
+  "Kế Tiếp":   "Wayfinder",
+  "Tri Thức":  "Discovery",
   "Lưu Dấu":  "Memory",
-  "Tỏa Sáng": "Shine",
+  "Tỏa Sáng": "Radiance",
 };
 
-// These stations have a reversed "Name Station" format — don't add prefix
-const STATION_EN_FULL = new Set(["Kế Tiếp", "Tri Thức"]);
 
 function AgendaCard({ item, accent }: { item: AgendaItem; accent: string }) {
   const { lang, t } = useLanguage();
@@ -248,9 +246,7 @@ function AgendaCard({ item, accent }: { item: AgendaItem; accent: string }) {
     ? (lang === "en" ? (STATION_EN[item.station] ?? item.station) : item.station)
     : null;
   const displayTitle = stationName
-    ? (lang === "en" && item.station && STATION_EN_FULL.has(item.station)
-        ? STATION_EN[item.station]
-        : `${prefix} ${stationName}`)
+    ? (lang === "en" ? `${stationName} Station` : `${prefix} ${stationName}`)
     : (lang === "en" ? (item.title_en ?? item.title) : item.title);
   const activityTag = item.station
     ? (lang === "en" ? (item.title_en ?? item.title) : item.title)
