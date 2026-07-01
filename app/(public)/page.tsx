@@ -3,6 +3,8 @@ import HeroSection from "./HeroSection";
 import HomeSections from "./HomeSections";
 import type { LeaderboardEntry, Announcement } from "@/lib/supabase/types";
 
+export const revalidate = 0;
+
 async function getHomeData() {
   try {
     const supabase = await createClient();
