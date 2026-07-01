@@ -6,7 +6,7 @@ import { createClient } from "@/lib/supabase/server";
 import type { Announcement } from "@/lib/supabase/types";
 import type { Metadata } from "next";
 
-export const revalidate = 60;
+export const revalidate = 0;
 
 export async function generateMetadata({
   params,

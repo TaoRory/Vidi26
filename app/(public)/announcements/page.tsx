@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: "Thông báo sự kiện VIDI26",
 };
 
-export const revalidate = 60;
+export const revalidate = 0;
 
 export default async function AnnouncementsPage() {
   let list: Announcement[] = [];
