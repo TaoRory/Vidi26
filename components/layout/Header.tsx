@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { Menu, X, Train } from "lucide-react";
+import { Menu, X, Train, Lock } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -168,5 +168,28 @@ export default function Header() {
         )}
       </div>
     </header>
+
+      {/* Admin shortcut — fixed bottom-right */}
+      <Link
+        href="/admin/login"
+        className="fixed bottom-5 right-5 z-50 w-9 h-9 rounded-full flex items-center justify-center transition-all"
+        style={{
+          backgroundColor: "rgba(5,8,20,0.75)",
+          border: "1px solid var(--border-subtle)",
+          backdropFilter: "blur(8px)",
+          color: "var(--text-muted)",
+        }}
+        title="Admin"
+        onMouseEnter={(e) => {
+          e.currentTarget.style.borderColor = "var(--neon-primary)";
+          e.currentTarget.style.color = "var(--neon-primary)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.borderColor = "var(--border-subtle)";
+          e.currentTarget.style.color = "var(--text-muted)";
+        }}
+      >
+        <Lock size={14} />
+      </Link>
   );
 }
