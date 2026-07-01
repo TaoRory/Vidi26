@@ -72,8 +72,8 @@ const DAY1: AgendaItem[] = [
   },
   {
     time: "18:00 → 20:00",
-    title: "Dinner time - Khám phá ẩm thực",
-    title_en: "Dinner time - Food Discovery",
+    title: "Dinner time - Food Discovery",
+    location: "Ocean Park",
     type: "break",
   },
   {
@@ -175,8 +175,8 @@ const DAY2: AgendaItem[] = [
   },
   {
     time: "14:30 → 17:30",
-    title: "Tập văn nghệ + Tổng duyệt + Nghỉ ngơi tự do",
-    title_en: "Arts rehearsal + Full run + Free time",
+    title: "Tổng Duyệt | Nghỉ Ngơi Tự Do",
+    title_en: "Final Rehearsal | Free Break",
     location: "Auditorium + Ký túc xá",
     type: "break",
   },
@@ -227,11 +227,14 @@ const STATION_EN: Record<string, string> = {
   "Khởi Hành": "Departure",
   "Đồng Hành": "Companion",
   "Kích Hoạt": "Ignite",
-  "Kế Tiếp":   "Next Stop",
-  "Tri Thức":  "Knowledge",
+  "Kế Tiếp":   "Wayfinder Station",
+  "Tri Thức":  "Discovery Station",
   "Lưu Dấu":  "Memory",
   "Tỏa Sáng": "Shine",
 };
+
+// These stations have a reversed "Name Station" format — don't add prefix
+const STATION_EN_FULL = new Set(["Kế Tiếp", "Tri Thức"]);
 
 function AgendaCard({ item, accent }: { item: AgendaItem; accent: string }) {
   const { lang, t } = useLanguage();
@@ -245,7 +248,9 @@ function AgendaCard({ item, accent }: { item: AgendaItem; accent: string }) {
     ? (lang === "en" ? (STATION_EN[item.station] ?? item.station) : item.station)
     : null;
   const displayTitle = stationName
-    ? `${prefix} ${stationName}`
+    ? (lang === "en" && item.station && STATION_EN_FULL.has(item.station)
+        ? STATION_EN[item.station]
+        : `${prefix} ${stationName}`)
     : (lang === "en" ? (item.title_en ?? item.title) : item.title);
   const activityTag = item.station
     ? (lang === "en" ? (item.title_en ?? item.title) : item.title)
