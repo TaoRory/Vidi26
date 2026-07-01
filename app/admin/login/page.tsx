@@ -23,10 +23,22 @@ function LoginForm() {
     setError(null);
 
     const supabase = createClient();
-    const { error: authError } = await supabase.auth.signInWithPassword({ email, password });
+    const timeout = new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error("timeout")), 10000)
+    );
+    const authCall = supabase.auth.signInWithPassword({ email, password });
+    const result = await Promise.race([authCall, timeout]).catch((err) => {
+      if (err.message === "timeout") return { error: { message: "timeout" } };
+      return { error: err };
+    }) as Awaited<typeof authCall>;
 
+    const authError = result.error;
     if (authError) {
-      setError("Tín hiệu bị gián đoạn — kiểm tra lại email và mật khẩu.");
+      setError(
+        (authError as { message: string }).message === "timeout"
+          ? "Kết nối máy chủ hết thời gian — thử lại sau ít phút."
+          : "Tín hiệu bị gián đoạn — kiểm tra lại email và mật khẩu."
+      );
       setLoading(false);
       return;
     }
