@@ -79,7 +79,7 @@ const DAY1: AgendaItem[] = [
   {
     time: "20:00 → 22:00",
     title: "Scavenger Hunt",
-    location: "I Building",
+    location: "I, C, A Building · ELAB",
     station: "Kế Tiếp",
     highlight: true,
     type: "special",
