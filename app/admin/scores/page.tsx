@@ -116,12 +116,17 @@ export default function AdminScoresPage() {
   async function deleteScore(id: string) {
     if (!confirm("Xóa bản ghi điểm này?")) return;
     const supabase = createClient();
-    const { error } = await supabase.from("scores").delete().eq("id", id);
-    if (!error) {
-      setHistory((prev) => prev.filter((h) => h.id !== id));
-    } else {
+    // .select() lets us verify rows were actually deleted (RLS silent failure returns empty array)
+    const { data, error } = await supabase.from("scores").delete().eq("id", id).select();
+    if (error) {
       alert("Lỗi xóa: " + error.message);
+      return;
     }
+    if (!data || data.length === 0) {
+      alert("Không thể xóa — chạy SQL policy trong Supabase trước (xem hướng dẫn).");
+      return;
+    }
+    setHistory((prev) => prev.filter((h) => h.id !== id));
   }
 
   async function loadHistory() {
