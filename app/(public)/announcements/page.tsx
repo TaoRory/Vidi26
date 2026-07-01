@@ -14,15 +14,19 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function AnnouncementsPage() {
-  const supabase = await createClient();
-  const { data: raw } = await supabase
-    .from("announcements")
-    .select("id, title, slug, cover_url, pinned, published_at, body_md")
-    .eq("published", true)
-    .order("pinned", { ascending: false })
-    .order("published_at", { ascending: false });
-
-  const list = (raw as Announcement[] | null) ?? [];
+  let list: Announcement[] = [];
+  try {
+    const supabase = await createClient();
+    const { data: raw } = await supabase
+      .from("announcements")
+      .select("id, title, slug, cover_url, pinned, published_at, body_md")
+      .eq("published", true)
+      .order("pinned", { ascending: false })
+      .order("published_at", { ascending: false });
+    list = (raw as Announcement[] | null) ?? [];
+  } catch {
+    list = [];
+  }
 
   return (
     <div>

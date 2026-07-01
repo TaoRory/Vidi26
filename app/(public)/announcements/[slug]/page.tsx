@@ -31,14 +31,19 @@ export default async function AnnouncementDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const supabase = await createClient();
-  const { data: raw } = await supabase
-    .from("announcements")
-    .select("*")
-    .eq("slug", slug)
-    .eq("published", true)
-    .single();
-  const data = raw as Announcement | null;
+  let data: Announcement | null = null;
+  try {
+    const supabase = await createClient();
+    const { data: raw } = await supabase
+      .from("announcements")
+      .select("*")
+      .eq("slug", slug)
+      .eq("published", true)
+      .single();
+    data = raw as Announcement | null;
+  } catch {
+    data = null;
+  }
 
   if (!data) notFound();
 
