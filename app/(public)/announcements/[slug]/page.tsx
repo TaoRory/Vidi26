@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Pin, ArrowLeft, Clock } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
+import { getLang } from "@/lib/i18n/getLang";
 import type { Announcement } from "@/lib/supabase/types";
 import type { Metadata } from "next";
 
@@ -31,6 +32,8 @@ export default async function AnnouncementDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const lang = await getLang();
+  const isEn = lang === "en";
   let data: Announcement | null = null;
   try {
     const supabase = await createClient();
@@ -57,7 +60,7 @@ export default async function AnnouncementDetailPage({
         onMouseEnter={undefined}
       >
         <ArrowLeft size={14} />
-        Tất cả thông báo
+        {isEn ? "All announcements" : "Tất cả thông báo"}
       </Link>
 
       {/* Facebook-style post card */}
@@ -81,14 +84,14 @@ export default async function AnnouncementDetailPage({
                   className="inline-flex items-center gap-1 text-[9px] uppercase tracking-widest px-2 py-0.5 rounded"
                   style={{ backgroundColor: "rgba(245,197,24,0.1)", color: "var(--accent-gold)", border: "1px solid rgba(245,197,24,0.3)" }}
                 >
-                  <Pin size={8} /> Ghim
+                  <Pin size={8} /> {isEn ? "Pinned" : "Ghim"}
                 </span>
               )}
             </div>
             {data.published_at && (
               <p className="text-xs flex items-center gap-1 mt-0.5" style={{ color: "var(--text-muted)" }}>
                 <Clock size={10} />
-                {new Date(data.published_at).toLocaleDateString("vi-VN", {
+                {new Date(data.published_at).toLocaleDateString(isEn ? "en-US" : "vi-VN", {
                   weekday: "long", day: "2-digit", month: "2-digit", year: "numeric",
                   hour: "2-digit", minute: "2-digit",
                 })}

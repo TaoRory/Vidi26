@@ -26,6 +26,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   function setLang(l: Lang) {
     setLangState(l);
     localStorage.setItem("vidi26-lang", l);
+    document.cookie = `vidi26-lang=${l}; path=/; max-age=31536000; SameSite=Lax`;
   }
 
   return (

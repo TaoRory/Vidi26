@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Pin, Megaphone } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { TrainTrack } from "@/components/theme/TrainTrack";
+import { getLang } from "@/lib/i18n/getLang";
 import type { Announcement } from "@/lib/supabase/types";
 import type { Metadata } from "next";
 
@@ -14,6 +15,9 @@ export const metadata: Metadata = {
 export const revalidate = 0;
 
 export default async function AnnouncementsPage() {
+  const lang = await getLang();
+  const isEn = lang === "en";
+
   let list: Announcement[] = [];
   try {
     const supabase = await createClient();
@@ -51,7 +55,7 @@ export default async function AnnouncementsPage() {
                 className="text-3xl sm:text-4xl font-black uppercase tracking-wider"
                 style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}
               >
-                Thông <span style={{ color: "var(--neon-primary)" }}>Báo</span>
+                {isEn ? <>Announce<span style={{ color: "var(--neon-primary)" }}>ments</span></> : <>Thông <span style={{ color: "var(--neon-primary)" }}>Báo</span></>}
               </h1>
               <p className="text-sm uppercase tracking-widest" style={{ color: "var(--text-muted)" }}>
                 ANNOUNCEMENTS · VIDI26
@@ -70,7 +74,7 @@ export default async function AnnouncementsPage() {
             style={{ backgroundColor: "var(--bg-surface)", border: "1px solid var(--border-subtle)" }}
           >
             <Megaphone size={32} className="mx-auto mb-3" style={{ color: "var(--text-muted)" }} />
-            <p style={{ color: "var(--text-muted)" }}>Trạm này chưa có dữ liệu, quay lại sau</p>
+            <p style={{ color: "var(--text-muted)" }}>{isEn ? "No data here yet, check back soon" : "Trạm này chưa có dữ liệu, quay lại sau"}</p>
           </div>
         ) : (
           <div className="space-y-6">
@@ -83,7 +87,7 @@ export default async function AnnouncementsPage() {
                 .slice(0, 220);
 
               const dateStr = ann.published_at
-                ? new Date(ann.published_at).toLocaleDateString("vi-VN", {
+                ? new Date(ann.published_at).toLocaleDateString(isEn ? "en-US" : "vi-VN", {
                     day: "2-digit", month: "2-digit", year: "numeric",
                     hour: "2-digit", minute: "2-digit",
                   })
@@ -111,7 +115,7 @@ export default async function AnnouncementsPage() {
                             className="inline-flex items-center gap-1 text-[9px] uppercase tracking-widest px-2 py-0.5 rounded"
                             style={{ backgroundColor: "rgba(245,197,24,0.1)", color: "var(--accent-gold)", border: "1px solid rgba(245,197,24,0.3)" }}
                           >
-                            <Pin size={8} /> Ghim
+                            <Pin size={8} /> {isEn ? "Pinned" : "Ghim"}
                           </span>
                         )}
                       </div>
@@ -126,7 +130,7 @@ export default async function AnnouncementsPage() {
                     <p className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
                       {caption}…{" "}
                       <Link href={`/announcements/${ann.slug}`} className="font-semibold" style={{ color: "var(--neon-primary)" }}>
-                        Xem thêm
+                        {isEn ? "See more" : "Xem thêm"}
                       </Link>
                     </p>
                   </div>
@@ -157,7 +161,7 @@ export default async function AnnouncementsPage() {
                       className="text-xs font-semibold px-3 py-1 rounded-lg transition-colors"
                       style={{ backgroundColor: "rgba(63,169,255,0.1)", color: "var(--neon-primary)", border: "1px solid var(--border-subtle)" }}
                     >
-                      Đọc tiếp →
+                      {isEn ? "Read more →" : "Đọc tiếp →"}
                     </Link>
                   </div>
                 </div>
