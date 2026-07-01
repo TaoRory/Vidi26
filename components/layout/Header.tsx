@@ -57,6 +57,7 @@ export default function Header() {
   const c = t.header.countdown;
 
   return (
+    <>
     <header
       className="sticky top-0 z-50 w-full"
       style={{ backgroundColor: "rgba(5, 8, 20, 0.92)", backdropFilter: "blur(16px)", borderBottom: "1px solid var(--border-subtle)" }}
@@ -191,5 +192,6 @@ export default function Header() {
       >
         <Lock size={14} />
       </Link>
+    </>
   );
 }
