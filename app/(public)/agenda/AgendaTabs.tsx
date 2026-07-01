@@ -17,6 +17,7 @@ type AgendaItem = {
   title: string;
   title_en?: string;
   location?: string;
+  location_en?: string;
   station?: string;
   highlight?: boolean;
   sub?: string[];
@@ -30,6 +31,7 @@ const DAY1: AgendaItem[] = [
     time: "07:00 → 10:00",
     title: "Arrival & Check-in",
     location: "Ký túc xá (JA, JB)",
+    location_en: "Dormitory (JA, JB)",
     station: "Khởi Hành",
     highlight: true,
     type: "special",
@@ -53,6 +55,7 @@ const DAY1: AgendaItem[] = [
     time: "12:00 → 14:00",
     title: "Lunchbreak",
     location: "Ký túc xá + Nhà E",
+    location_en: "Dormitory + Building E",
     type: "break",
   },
   {
@@ -89,6 +92,7 @@ const DAY1: AgendaItem[] = [
     title: "Kết thúc lịch trình ngày 1",
     title_en: "End of Day 1",
     location: "Ký túc xá",
+    location_en: "Dormitory",
     type: "break",
   },
 ];
@@ -164,6 +168,7 @@ const DAY2: AgendaItem[] = [
     time: "12:00 → 13:30",
     title: "Lunchbreak",
     location: "Ký túc xá + Nhà E",
+    location_en: "Dormitory + Building E",
     type: "break",
   },
   {
@@ -178,6 +183,7 @@ const DAY2: AgendaItem[] = [
     title: "Tổng Duyệt | Nghỉ Ngơi Tự Do",
     title_en: "Final Rehearsal | Free Break",
     location: "Auditorium + Ký túc xá",
+    location_en: "Auditorium + Dormitory",
     type: "break",
   },
   {
@@ -194,6 +200,7 @@ const DAY2: AgendaItem[] = [
     title: "Kết thúc lịch trình ngày 2",
     title_en: "End of Day 2",
     location: "Ký túc xá",
+    location_en: "Dormitory",
     type: "break",
   },
 ];
@@ -203,6 +210,7 @@ const DAY3: AgendaItem[] = [
     time: "07:00 → 10:00",
     title: "Check-out",
     location: "Ký túc xá",
+    location_en: "Dormitory",
     type: "default",
   },
 ];
@@ -310,7 +318,7 @@ function AgendaCard({ item, accent }: { item: AgendaItem; accent: string }) {
           {item.location && (
             <p className="text-xs mb-1.5 flex items-center gap-1" style={{ color: "var(--text-muted)" }}>
               <MapPin size={9} style={{ flexShrink: 0 }} />
-              {item.location}
+              {lang === "en" ? (item.location_en ?? item.location) : item.location}
             </p>
           )}
           {subItems && subItems.length > 0 && (
