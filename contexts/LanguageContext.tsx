@@ -20,7 +20,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const stored = localStorage.getItem("vidi26-lang") as Lang | null;
-    if (stored === "en" || stored === "vi") setLangState(stored);
+    if (stored === "en" || stored === "vi") {
+      setLangState(stored);
+      document.cookie = `vidi26-lang=${stored}; path=/; max-age=31536000; SameSite=Lax`;
+    }
   }, []);
 
   function setLang(l: Lang) {
