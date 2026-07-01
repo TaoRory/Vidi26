@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ChevronRight, Check, AlertCircle, X, Clock } from "lucide-react";
+import { ChevronRight, Check, AlertCircle, X, Clock, Trash2 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import NeonButton from "@/components/theme/NeonButton";
 import GlowPanel from "@/components/theme/GlowPanel";
@@ -110,6 +110,17 @@ export default function AdminScoresPage() {
     } else {
       setSubmitResult({ success: data?.length ?? 0, failed: 0 });
       setStep(3);
+    }
+  }
+
+  async function deleteScore(id: string) {
+    if (!confirm("Xóa bản ghi điểm này?")) return;
+    const supabase = createClient();
+    const { error } = await supabase.from("scores").delete().eq("id", id);
+    if (!error) {
+      setHistory((prev) => prev.filter((h) => h.id !== id));
+    } else {
+      alert("Lỗi xóa: " + error.message);
     }
   }
 
@@ -423,6 +434,15 @@ export default function AdminScoresPage() {
                       <div className="text-xs" style={{ color: "var(--text-muted)" }}>
                         {new Date(h.created_at).toLocaleString("vi-VN")}
                       </div>
+                      <button
+                        onClick={() => deleteScore(h.id)}
+                        title="Xóa bản ghi này"
+                        style={{ color: "var(--text-muted)" }}
+                        onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent-red)")}
+                        onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
+                      >
+                        <Trash2 size={12} />
+                      </button>
                     </div>
                   ))}
                 </div>
