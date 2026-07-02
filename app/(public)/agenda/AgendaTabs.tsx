@@ -235,7 +235,7 @@ const STATION_EN: Record<string, string> = {
   "Khởi Hành": "Departure",
   "Đồng Hành": "Companion",
   "Kích Hoạt": "Ignition",
-  "Kế Tiếp":   "Wayfinder",
+  "Kế Tiếp":   "Energy",
   "Tri Thức":  "Discovery",
   "Lưu Dấu":  "Memory",
   "Tỏa Sáng": "Radiance",

@@ -8,7 +8,7 @@ const STATIONS = [
   { num: "01", vi: "Khởi Hành",  en: "Departure",   day: 1 },
   { num: "02", vi: "Đồng Hành",  en: "Companion",   day: 1 },
   { num: "03", vi: "Kích Hoạt",  en: "Ignition",    day: 1 },
-  { num: "04", vi: "Kế Tiếp",   en: "Wayfinder",   day: 2 },
+  { num: "04", vi: "Kế Tiếp",   en: "Energy",   day: 2 },
   { num: "05", vi: "Tri Thức",   en: "Discovery",   day: 2 },
   { num: "06", vi: "Lưu Dấu",   en: "Memory",      day: 3 },
   { num: "07", vi: "Tỏa Sáng",  en: "Radiance",    day: 3 },
