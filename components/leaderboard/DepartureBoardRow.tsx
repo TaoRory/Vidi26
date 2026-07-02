@@ -42,7 +42,7 @@ export default function DepartureBoardRow({ entry, rank }: DepartureBoardRowProp
         className="w-9 h-9 rounded flex items-center justify-center text-xs font-bold shrink-0"
         style={{
           backgroundColor: entry.color_hex ? `${entry.color_hex}33` : "rgba(63,169,255,0.15)",
-          border: `2px solid ${entry.color_hex || "var(--neon-primary)"}`,
+          border: "1px solid var(--border-glow)",
           color: "var(--text-primary)",
         }}
       >
