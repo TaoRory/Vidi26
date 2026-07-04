@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { formatScore, formatRelativeTime } from "@/lib/utils";
 import type { LeaderboardEntry } from "@/lib/supabase/types";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface DepartureBoardRowProps {
   entry: LeaderboardEntry;
@@ -10,6 +11,8 @@ interface DepartureBoardRowProps {
 }
 
 export default function DepartureBoardRow({ entry, rank }: DepartureBoardRowProps) {
+  const { t } = useLanguage();
+  const ll = t.leaderboard_live;
   return (
     <motion.div
       layout
@@ -55,7 +58,7 @@ export default function DepartureBoardRow({ entry, rank }: DepartureBoardRowProp
           {entry.name}
         </div>
         <div className="text-xs flex items-center gap-2 mt-0.5" style={{ color: "var(--text-muted)" }}>
-          <span>{Number(entry.challenges_scored)} thử thách</span>
+          <span>{Number(entry.challenges_scored)} {ll.challenges}</span>
           {entry.last_update && (
             <>
               <span>·</span>
@@ -73,7 +76,7 @@ export default function DepartureBoardRow({ entry, rank }: DepartureBoardRowProp
         >
           {formatScore(Number(entry.total_score))}
         </div>
-        <div className="text-[9px] uppercase" style={{ color: "var(--text-muted)" }}>điểm</div>
+        <div className="text-[9px] uppercase" style={{ color: "var(--text-muted)" }}>{ll.score_unit}</div>
       </div>
     </motion.div>
   );

@@ -5,6 +5,7 @@ import { Trophy } from "lucide-react";
 import BoardingPassCard from "@/components/theme/BoardingPassCard";
 import { formatScore } from "@/lib/utils";
 import type { LeaderboardEntry } from "@/lib/supabase/types";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface TopThreeCardsProps {
   top3: LeaderboardEntry[];
@@ -15,6 +16,8 @@ const HEIGHTS = ["lg:mt-8", "lg:mt-0", "lg:mt-16"];
 const TROPHIES = ["🥇", "🥈", "🥉"];
 
 export default function TopThreeCards({ top3 }: TopThreeCardsProps) {
+  const { t } = useLanguage();
+  const ll = t.leaderboard_live;
   const ordered = [
     top3[1] ?? null,
     top3[0] ?? null,
@@ -53,7 +56,7 @@ export default function TopThreeCards({ top3 }: TopThreeCardsProps) {
               teamNumber={entry.team_number}
               teamName={entry.name}
               score={formatScore(Number(entry.total_score))}
-              subLabel={`${Number(entry.challenges_scored)} thử thách hoàn thành`}
+              subLabel={`${Number(entry.challenges_scored)} ${ll.challenges}`}
               variant={variant}
             >
               <div className="flex items-end justify-between">
@@ -69,7 +72,7 @@ export default function TopThreeCards({ top3 }: TopThreeCardsProps) {
                     {entry.name}
                   </div>
                   <div className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>
-                    {Number(entry.challenges_scored)} thử thách
+                    {Number(entry.challenges_scored)} {ll.challenges}
                   </div>
                 </div>
                 <div className="text-right">

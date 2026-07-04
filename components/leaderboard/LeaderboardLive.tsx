@@ -80,7 +80,7 @@ export default function LeaderboardLive({ initialData, stations }: LeaderboardLi
                   border: filter === s.slug ? "1px solid var(--neon-primary)" : "1px solid var(--border-subtle)",
                 }}
               >
-                {s.name_vi}
+                {lang === "en" ? s.name_en : s.name_vi}
               </button>
             ))}
           </div>

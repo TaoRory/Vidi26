@@ -67,6 +67,8 @@ export const translations = {
       teams_unit: "đội",
       empty: "Đang đồng bộ tín hiệu... quay lại sau",
       refresh: "Làm mới",
+      challenges: "thử thách",
+      score_unit: "điểm",
     },
     mini_leaderboard: {
       loading: "Đang đồng bộ tín hiệu...",
@@ -158,6 +160,8 @@ export const translations = {
       teams_unit: "teams",
       empty: "Syncing data... check back soon",
       refresh: "Refresh",
+      challenges: "challenges",
+      score_unit: "pts",
     },
     mini_leaderboard: {
       loading: "Loading...",
