@@ -11,7 +11,7 @@ const STATIONS = [
   { num: "04", vi: "Kế Tiếp",   en: "Energy",   day: 2 },
   { num: "05", vi: "Tri Thức",   en: "Discovery",   day: 2 },
   { num: "06", vi: "Lưu Dấu",   en: "Memory",      day: 3 },
-  { num: "07", vi: "Tỏa Sáng",  en: "Radiance",    day: 3 },
+  { num: "07", vi: "Tỏa Sáng",  en: "Shine",    day: 3 },
 ];
 
 export default function AgendaHeader() {

@@ -12,7 +12,7 @@ const STATIONS = [
   { slug: "ke-tiep",    vi: "Kế Tiếp",    en: "Energy",   num: "04" },
   { slug: "tri-thuc",   vi: "Tri Thức",   en: "Discovery",   num: "05" },
   { slug: "luu-dau",    vi: "Lưu Dấu",    en: "Memory",      num: "06" },
-  { slug: "toa-sang",   vi: "Tỏa Sáng",   en: "Radiance",    num: "07" },
+  { slug: "toa-sang",   vi: "Tỏa Sáng",   en: "Shine",    num: "07" },
 ];
 
 export default function Footer() {

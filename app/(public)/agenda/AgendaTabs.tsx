@@ -238,7 +238,7 @@ const STATION_EN: Record<string, string> = {
   "Kế Tiếp":   "Energy",
   "Tri Thức":  "Discovery",
   "Lưu Dấu":  "Memory",
-  "Tỏa Sáng": "Radiance",
+  "Tỏa Sáng": "Shine",
 };
 
 
