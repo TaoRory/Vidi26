@@ -1,3 +1,4 @@
+import React from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -131,14 +132,58 @@ export default async function AnnouncementDetailPage({
   );
 }
 
+function parseInline(text: string): React.ReactNode[] {
+  const nodes: React.ReactNode[] = [];
+  // Combined regex: **bold** or [text](url)
+  const re = /\*\*(.+?)\*\*|\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g;
+  let last = 0;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(text)) !== null) {
+    if (m.index > last) nodes.push(text.slice(last, m.index));
+    if (m[1] !== undefined) {
+      nodes.push(<strong key={m.index}>{m[1]}</strong>);
+    } else {
+      nodes.push(
+        <a
+          key={m.index}
+          href={m[3]}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "var(--neon-primary)", textDecoration: "underline" }}
+        >
+          {m[2]}
+        </a>
+      );
+    }
+    last = m.index + m[0].length;
+  }
+  if (last < text.length) nodes.push(text.slice(last));
+  return nodes;
+}
+
 function PostCaption({ content }: { content: string }) {
-  const paragraphs = content.split(/\n+/).filter(Boolean);
+  const lines = content.split("\n");
+  const elements: React.ReactNode[] = [];
+  let key = 0;
+
+  for (const line of lines) {
+    if (line.trim() === "") continue;
+    if (line.trim() === "---") {
+      elements.push(
+        <hr key={key++} style={{ borderColor: "var(--border-subtle)", margin: "12px 0" }} />
+      );
+    } else {
+      elements.push(
+        <p key={key++} style={{ margin: "6px 0" }}>
+          {parseInline(line)}
+        </p>
+      );
+    }
+  }
 
   return (
-    <div className="space-y-2 text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-      {paragraphs.map((para, i) => (
-        <p key={i}>{para}</p>
-      ))}
+    <div className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+      {elements}
     </div>
   );
 }
