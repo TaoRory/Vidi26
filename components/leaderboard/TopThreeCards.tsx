@@ -14,6 +14,8 @@ interface TopThreeCardsProps {
 const VARIANTS: Array<"gold" | "silver" | "bronze"> = ["gold", "silver", "bronze"];
 const HEIGHTS = ["lg:mt-8", "lg:mt-0", "lg:mt-16"];
 const TROPHIES = ["🥇", "🥈", "🥉"];
+// Mobile: show #1 first, then #2, then #3. Desktop: keep left=#2, center=#1, right=#3
+const MOBILE_ORDERS = ["order-2 sm:order-1", "order-1 sm:order-2", "order-3"];
 
 export default function TopThreeCards({ top3 }: TopThreeCardsProps) {
   const { t } = useLanguage();
@@ -35,7 +37,7 @@ export default function TopThreeCards({ top3 }: TopThreeCardsProps) {
           return (
             <div
               key={`empty-${displayIdx}`}
-              className={`${height} rounded-xl`}
+              className={`${height} ${MOBILE_ORDERS[displayIdx]} rounded-xl`}
               style={{ backgroundColor: "var(--bg-surface)", border: "1px solid var(--border-subtle)", minHeight: 200, opacity: 0.4 }}
             />
           );
@@ -46,7 +48,7 @@ export default function TopThreeCards({ top3 }: TopThreeCardsProps) {
             key={entry.id}
             layout
             layoutId={`top-${entry.id}`}
-            className={height}
+            className={`${height} ${MOBILE_ORDERS[displayIdx]}`}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: displayIdx * 0.1 }}
